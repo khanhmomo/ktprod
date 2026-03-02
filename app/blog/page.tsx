@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getAllBlogPosts } from "@/lib/database-appwrite";
 import { BlogCard } from "@/components/shared/blog-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -17,7 +16,14 @@ export default function BlogPage() {
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const allPosts = await getAllBlogPosts();
+        // Use API route instead of direct database call
+        const response = await fetch('/api/blog/posts');
+        const allPosts = await response.json();
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+        
         setPosts(allPosts);
       } catch (error) {
         console.error('Failed to load posts:', error);
