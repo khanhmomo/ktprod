@@ -11,6 +11,7 @@ export interface BlogPost {
   author?: string;
   category?: string;
   published: boolean;
+  readingTime?: number; // in minutes
   createdAt: Date;
   updatedAt: Date;
   publishedAt?: Date;
