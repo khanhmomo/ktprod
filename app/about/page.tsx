@@ -2,6 +2,7 @@ import { Target, Lightbulb, Users, Award, ArrowRight } from "lucide-react";
 import { getPageContent } from "@/lib/database-appwrite";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default async function AboutPage() {
   const pageContent = await getPageContent('about');
@@ -190,8 +191,19 @@ export default async function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center space-y-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-3xl font-bold text-primary">KT</span>
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 relative">
+                <Image
+                  src="/images/founders/khanh-tran.jpg"
+                  alt="Khanh Tran"
+                  fill
+                  className="object-cover"
+                  onError={(e) => {
+                    // Fallback to initials if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-primary">KT</span>';
+                  }}
+                />
               </div>
               <h3 className="text-2xl font-semibold">Khanh Tran (Mo)</h3>
               <p className="text-muted-foreground">
@@ -204,8 +216,19 @@ export default async function AboutPage() {
               </p>
             </div>
             <div className="text-center space-y-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-3xl font-bold text-primary">ND</span>
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 relative">
+                <Image
+                  src="/images/founders/nam-dao.jpg"
+                  alt="Nam Dao"
+                  fill
+                  className="object-cover"
+                  onError={(e) => {
+                    // Fallback to initials if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-primary">ND</span>';
+                  }}
+                />
               </div>
               <h3 className="text-2xl font-semibold">Nam Dao</h3>
               <p className="text-muted-foreground">
@@ -218,8 +241,19 @@ export default async function AboutPage() {
               </p>
             </div>
             <div className="text-center space-y-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-3xl font-bold text-primary">MT</span>
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 relative">
+                <Image
+                  src="/images/founders/minh-tran.jpg"
+                  alt="Minh Tran"
+                  fill
+                  className="object-cover"
+                  onError={(e) => {
+                    // Fallback to initials if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-primary">MT</span>';
+                  }}
+                />
               </div>
               <h3 className="text-2xl font-semibold">Minh Tran</h3>
               <p className="text-muted-foreground">
