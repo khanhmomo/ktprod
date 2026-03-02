@@ -47,17 +47,54 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       };
     }
 
-    return {
+    // Get the base URL from environment or fallback
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://ktprod.com';
+    const postUrl = `${baseUrl}/blog/${slug}`;
+    
+    // Prepare metadata with enhanced social sharing
+    const metadata: any = {
       title: post.title,
       description: post.description,
+      alternates: {
+        canonical: postUrl,
+      },
       openGraph: {
         title: post.title,
         description: post.description,
         type: "article",
         publishedTime: post.publishedAt || post.createdAt,
         authors: [post.author],
+        url: postUrl,
+        siteName: "KTProd Platform",
+        locale: "en_US",
+        // Facebook specific
+        appId: "your-facebook-app-id", // Optional: Add your Facebook App ID
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.description,
+        creator: "@ktprod", // Replace with your actual Twitter handle
+        site: "@ktprod", // Replace with your actual Twitter handle
       },
     };
+
+    // Add cover image if available, otherwise use default
+    const defaultImageUrl = `${baseUrl}/images/social-default.jpg`;
+    const imageUrl = post.featuredImage || defaultImageUrl;
+    
+    metadata.openGraph.images = [
+      {
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      },
+    ];
+    
+    metadata.twitter.images = [imageUrl];
+
+    return metadata;
   } catch (error) {
     console.error('Failed to generate metadata:', error);
     return {
