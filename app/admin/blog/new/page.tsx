@@ -12,6 +12,89 @@ import { FileUpload } from "@/components/admin/file-upload";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+// Client-side image compression function
+async function compressImagesInContent(formData: any): Promise<any> {
+  const content = formData.content;
+  
+  // Find all base64 images
+  const imgRegex = /<img([^>]*?)src="(data:image\/[^"]*)"([^>]*?)>/gi;
+  let compressedContent = content;
+  const matches = [...content.matchAll(imgRegex)];
+  
+  console.log(`Found ${matches.length} images to compress`);
+  
+  if (matches.length === 0) {
+    return formData;
+  }
+  
+  // Process each image
+  for (let i = 0; i < matches.length; i++) {
+    const match = matches[i];
+    const fullMatch = match[0];
+    const base64Src = match[2];
+    
+    try {
+      // Compress the image
+      const compressedBase64 = await compressBase64Image(base64Src);
+      compressedContent = compressedContent.replace(fullMatch, fullMatch.replace(base64Src, compressedBase64));
+      console.log(`Compressed image ${i + 1}/${matches.length}`);
+    } catch (error) {
+      console.error(`Failed to compress image ${i + 1}:`, error);
+      // Keep original if compression fails
+    }
+  }
+  
+  return {
+    ...formData,
+    content: compressedContent
+  };
+}
+
+// Compress a single base64 image
+async function compressBase64Image(base64Src: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    img.onload = () => {
+      try {
+        // Calculate new dimensions (max width 800px for web)
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Draw and compress
+        ctx?.drawImage(img, 0, 0, width, height);
+        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+        
+        resolve(compressedBase64);
+      } catch (error) {
+        reject(error);
+      }
+    };
+    
+    img.onerror = reject;
+    img.src = base64Src;
+  });
+}
+
 export default function NewBlogPostPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,15 +123,19 @@ export default function NewBlogPostPage() {
         throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
       }
 
+      // Compress images in content before sending
+      const compressedFormData = await compressImagesInContent(formData);
+      
       // Debug: Log the form data
-      console.log('Submitting form data:', formData);
+      console.log('Original content size:', formData.content.length);
+      console.log('Compressed content size:', compressedFormData.content.length);
       
       const response = await fetch('/api/blog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(compressedFormData),
       });
 
       // Debug: Log the response
