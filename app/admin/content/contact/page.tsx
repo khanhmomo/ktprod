@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { savePageContent, loadPageContent } from "@/lib/simple-db";
+import { getPageContent, storePageContent } from "@/lib/database-appwrite";
 import { Save, ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
 import Link from "next/link";
 
@@ -29,7 +29,7 @@ export default function ContactPageContent() {
 
   const loadContent = async () => {
     try {
-      const pageContent = await loadPageContent('contact');
+      const pageContent = await getPageContent('contact');
       if (pageContent) {
         setContent(pageContent);
       }
@@ -43,7 +43,7 @@ export default function ContactPageContent() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await savePageContent('contact', content);
+      await storePageContent('contact', content);
       alert('Content saved successfully!');
     } catch (error) {
       console.error('Failed to save content:', error);

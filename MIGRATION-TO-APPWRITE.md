@@ -43,7 +43,7 @@ npm uninstall cloudinary @cloudinary/url-gen @cloudinary/transformation-builder-
 
 ### 2. **Create Database**
 - Database ID: `ktprod-blog`
-- Collections:
+- Tables:
   - `blog-posts` (for blog posts)
   - `page-contents` (for page content)
 
@@ -61,12 +61,12 @@ APPWRITE_ENDPOINT="https://cloud.appwrite.io/v1"
 APPWRITE_PROJECT_ID="your-project-id"
 APPWRITE_API_KEY="your-api-key"
 APPWRITE_DATABASE_ID="ktprod-blog"
-APPWRITE_BLOG_POSTS_COLLECTION_ID="blog-posts"
-APPWRITE_PAGE_CONTENTS_COLLECTION_ID="page-contents"
+APPWRITE_BLOG_POSTS_TABLE_ID="blog-posts"
+APPWRITE_PAGE_CONTENTS_TABLE_ID="page-contents"
 APPWRITE_BUCKET_ID="blog-images"
 ```
 
-### 6. **Collection Attributes for blog-posts**
+### 6. **Table Attributes for blog-posts**
 - title (Text, Required)
 - slug (Text, Required, Unique)
 - description (Text, Required)
@@ -83,7 +83,7 @@ APPWRITE_BUCKET_ID="blog-images"
 - updatedAt (DateTime, Default: now)
 - publishedAt (DateTime, Optional)
 
-### 7. **Collection Attributes for page-contents**
+### 7. **Table Attributes for page-contents**
 - type (Text, Required, Unique)
 - title (Text, Required)
 - description (Text, Required)

@@ -72,9 +72,35 @@ export default function EditBlogPost({ params }: EditBlogPostProps) {
     }
   };
 
+  // Helper function to detect changed fields and send only what changed
+  const getChangedFields = (currentPost: BlogPost, originalPost: BlogPost) => {
+    const changedFields: any = {};
+    
+    // System fields that should never be sent
+    const systemFields = ['id', 'slug', 'createdAt', 'updatedAt', 'readingTime'];
+    
+    // Compare each field
+    for (const [key, currentValue] of Object.entries(currentPost)) {
+      // Skip system fields
+      if (systemFields.includes(key)) {
+        continue;
+      }
+      
+      const originalValue = originalPost[key as keyof BlogPost];
+      
+      // Check if value changed (handle null/undefined)
+      if (currentValue !== originalValue) {
+        changedFields[key] = currentValue;
+        console.log(`Field changed: ${key} = ${currentValue}`);
+      }
+    }
+    
+    return changedFields;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!post) return;
+    if (!post || !originalPost) return;
 
     setIsSubmitting(true);
 
@@ -83,31 +109,39 @@ export default function EditBlogPost({ params }: EditBlogPostProps) {
       console.log('Post content:', post.content);
       console.log('Content length:', post.content.length);
       
-      // Extract images from content
-      const extractedImages = extractImagesFromContent(post.content);
+      // Extract images from content, preserving existing markers
+      const extractedImages = extractImagesFromContent(post.content, originalPost.imageMarkers || []);
       console.log('Extracted images:', extractedImages.length);
       
-      // Prepare post data with extracted images
-      const postData = {
-        ...post,
-        imageMarkers: extractedImages,
-        updatedAt: new Date().toISOString(),
-      };
+      // Get only changed fields
+      const changedFields = getChangedFields(post, originalPost);
       
-      console.log('Final post data to save:', {
-        title: postData.title,
-        contentLength: postData.content.length,
-        imageCount: extractedImages.length,
-        hasImages: extractedImages.length > 0
-      });
+      // Only add imageMarkers if they actually changed
+      const imageMarkersChanged = JSON.stringify(extractedImages) !== JSON.stringify(originalPost.imageMarkers || []);
+      if (imageMarkersChanged) {
+        changedFields.imageMarkers = extractedImages;
+        console.log('Image markers changed, adding to update');
+      } else {
+        console.log('Image markers unchanged, skipping');
+      }
       
-      // Save the post
+      console.log('Changed fields detected:', Object.keys(changedFields));
+      console.log('Final data to send:', JSON.stringify(changedFields, null, 2));
+      
+      // If no fields changed, just redirect
+      if (Object.keys(changedFields).length === 0) {
+        console.log('No changes detected, redirecting...');
+        router.push('/admin/blog');
+        return;
+      }
+      
+      // Save only the changed fields
       const response = await fetch(`/api/blog/${postId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postData),
+        body: JSON.stringify(changedFields),
       });
 
       if (!response.ok) {
@@ -127,8 +161,8 @@ export default function EditBlogPost({ params }: EditBlogPostProps) {
     }
   };
 
-  // Extract images from HTML content
-  const extractImagesFromContent = (content: string): ImageMarker[] => {
+  // Extract images from HTML content, preserving existing IDs when possible
+  const extractImagesFromContent = (content: string, existingMarkers: ImageMarker[] = []): ImageMarker[] => {
     const imageMarkers: ImageMarker[] = [];
     
     // Create a temporary DOM element to parse HTML
@@ -138,15 +172,33 @@ export default function EditBlogPost({ params }: EditBlogPostProps) {
     // Find all img elements
     const imgElements = tempDiv.querySelectorAll('img');
     
+    // Create a map of existing image URLs to their markers for quick lookup
+    const existingMarkerMap = new Map<string, ImageMarker>();
+    existingMarkers.forEach(marker => {
+      existingMarkerMap.set(marker.src, marker);
+    });
+    
     imgElements.forEach((img, index) => {
       if (img.src) {
-        const marker: ImageMarker = {
-          id: `img_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 9)}`,
-          src: img.src,
-          position: 0, // Position not needed for simple approach
-          alt: img.alt || ''
-        };
-        imageMarkers.push(marker);
+        // Check if this image already exists in the original markers
+        const existingMarker = existingMarkerMap.get(img.src);
+        
+        if (existingMarker) {
+          // Reuse existing marker to avoid unnecessary changes
+          imageMarkers.push({
+            ...existingMarker,
+            alt: img.alt || existingMarker.alt
+          });
+        } else {
+          // Create new marker for new images
+          const marker: ImageMarker = {
+            id: `img_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 9)}`,
+            src: img.src,
+            position: 0,
+            alt: img.alt || ''
+          };
+          imageMarkers.push(marker);
+        }
       }
     });
     

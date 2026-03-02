@@ -20,8 +20,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   try {
     const response = await databases.listDocuments(
       DATABASE_ID,
-      BLOG_POSTS_COLLECTION_ID,
-      [Query.orderDesc('createdAt')]
+      BLOG_POSTS_COLLECTION_ID
     );
 
     return response.documents.map((doc: any) => ({
@@ -38,12 +37,13 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
       category: doc.category || undefined,
       published: doc.published,
       readingTime: doc.readingTime || undefined,
-      createdAt: new Date(doc.createdAt),
-      updatedAt: new Date(doc.updatedAt),
+      createdAt: doc.createdAt ? new Date(doc.createdAt) : new Date(),
+      updatedAt: doc.updatedAt ? new Date(doc.updatedAt) : new Date(),
       publishedAt: doc.publishedAt ? new Date(doc.publishedAt) : undefined,
     }));
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to get blog posts:', error);
+    // Return empty array if Appwrite is not accessible or tables not set up
     return [];
   }
 }
@@ -151,8 +151,26 @@ export async function createBlogPost(post: Omit<BlogPost, 'id' | 'slug' | 'creat
         publishedAt: post.publishedAt ? new Date(post.publishedAt).toISOString() : null,
       }
     );
-
-    return await getBlogPostById(response.$id) as BlogPost;
+    
+    // Return the created post with ID
+    return {
+      id: response.$id,
+      title: post.title,
+      slug,
+      description: post.description,
+      excerpt: post.excerpt || undefined,
+      content: post.content,
+      coverImage: post.coverImage || undefined,
+      featuredImage: post.featuredImage || undefined,
+      videoUrl: post.videoUrl || undefined,
+      author: post.author || undefined,
+      category: post.category || undefined,
+      published: post.published,
+      readingTime,
+      createdAt: now,
+      updatedAt: now,
+      publishedAt: post.publishedAt ? new Date(post.publishedAt) : undefined,
+    };
   } catch (error) {
     console.error('Failed to create blog post:', error);
     throw new Error('Failed to create blog post');
@@ -188,13 +206,82 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
   }
 }
 
+// Helper function to extract file IDs from URLs
+function extractFileIds(urls: string[]): string[] {
+  const fileIds: string[] = [];
+  for (const url of urls) {
+    const match = url.match(/\/files\/([^\/]+)\/view/);
+    if (match && match[1]) {
+      fileIds.push(match[1]);
+    }
+  }
+  return fileIds;
+}
+
+// Helper function to extract all image URLs from content
+function extractImageUrls(content: string): string[] {
+  const urls: string[] = [];
+  const imgRegex = /<img[^>]*?src="(https:\/\/nyc\.cloud\.appwrite\.io\/v1\/storage\/buckets\/[^"]*)"[^>]*?>/gi;
+  const matches = content.matchAll(imgRegex);
+  
+  for (const match of matches) {
+    if (match[1]) {
+      urls.push(match[1]);
+    }
+  }
+  
+  return urls;
+}
+
 export async function deleteBlogPost(id: string): Promise<boolean> {
   try {
+    // First, get the post to extract image URLs before deletion
+    const post = await databases.getDocument(
+      DATABASE_ID,
+      BLOG_POSTS_COLLECTION_ID,
+      id
+    );
+    
+    // Collect all image URLs to delete
+    const urlsToDelete: string[] = [];
+    
+    // Extract URLs from content
+    if (post.content) {
+      urlsToDelete.push(...extractImageUrls(post.content));
+    }
+    
+    // Add cover image URL if it exists
+    if (post.coverImage && post.coverImage.startsWith('https://nyc.cloud.appwrite.io')) {
+      urlsToDelete.push(post.coverImage);
+    }
+    
+    // Add featured image URL if it exists
+    if (post.featuredImage && post.featuredImage.startsWith('https://nyc.cloud.appwrite.io')) {
+      urlsToDelete.push(post.featuredImage);
+    }
+    
+    // Extract file IDs and delete from storage
+    const fileIds = extractFileIds(urlsToDelete);
+    console.log(`Deleting ${fileIds.length} images from storage:`, fileIds);
+    
+    for (const fileId of fileIds) {
+      try {
+        await storage.deleteFile(BUCKET_ID, fileId);
+        console.log(`✅ Deleted image: ${fileId}`);
+      } catch (error) {
+        console.error(`❌ Failed to delete image ${fileId}:`, error);
+        // Continue with other deletions even if one fails
+      }
+    }
+    
+    // Delete the post document
     await databases.deleteDocument(
       DATABASE_ID,
       BLOG_POSTS_COLLECTION_ID,
       id
     );
+    
+    console.log(`✅ Deleted blog post: ${id} and ${fileIds.length} associated images`);
     return true;
   } catch (error) {
     console.error('Failed to delete blog post:', error);
@@ -212,8 +299,8 @@ export async function uploadImage(file: File, folder: string = 'blog'): Promise<
       new File([file], filename, { type: file.type })
     );
 
-    // Get file URL
-    const url = storage.getFileView(BUCKET_ID, response.$id);
+    // Get file URL - use public URL format
+    const url = `https://nyc.cloud.appwrite.io/v1/storage/buckets/${BUCKET_ID}/files/${response.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`;
     
     return {
       url: url.toString(),
@@ -245,8 +332,9 @@ export async function getPageContent(type: string): Promise<any> {
     );
 
     return response.documents.length > 0 ? response.documents[0] : null;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to get page content:', error);
+    // Return null if Appwrite is not accessible
     return null;
   }
 }

@@ -15,8 +15,8 @@ interface BlogPostPageProps {
 
 export async function generateStaticParams() {
   try {
-    // Use Cloudinary database instead of local file
-    const { getAllBlogPosts } = await import("@/lib/database-postgres");
+    // Use Appwrite database
+    const { getAllBlogPosts } = await import("@/lib/database-appwrite");
     const posts = await getAllBlogPosts();
     
     // Filter out posts without valid slugs
@@ -210,7 +210,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div 
-              className="prose prose-lg max-w-none dark:prose-invert"
+              className="prose prose-lg max-w-none dark:prose-invert [&_img]:mx-auto [&_img]:block [&_img]:max-w-full [&_img]:h-auto"
               dangerouslySetInnerHTML={{ __html: finalContent }}
             />
           </div>
