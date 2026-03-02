@@ -77,8 +77,32 @@ export async function createBlogPost(post: Omit<BlogPost, 'id' | 'createdAt' | '
 
 export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
   try {
-    const existingPost = await getBlogPostById(id);
-    if (!existingPost) return null;
+    // Get all posts to find the one with matching ID
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'blog/posts/',
+      resource_type: 'raw',
+    });
+
+    let existingPost: BlogPost | null = null;
+    let resourcePublicId: string | null = null;
+
+    for (const resource of result.resources) {
+      try {
+        const content = await getContent(resource.public_id);
+        if (content && typeof content === 'object' && 'id' in content && content.id === id) {
+          existingPost = content as BlogPost;
+          resourcePublicId = resource.public_id;
+          break;
+        }
+      } catch (error) {
+        console.error(`Failed to load blog post ${resource.public_id}:`, error);
+      }
+    }
+
+    if (!existingPost || !resourcePublicId) {
+      return null;
+    }
 
     const updatedPost: BlogPost = {
       ...existingPost,
@@ -86,7 +110,9 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
       updatedAt: new Date(),
     };
 
-    await storeContent(updatedPost, 'blog/posts');
+    // Update the content in Cloudinary using the same public_id
+    await storeContent(updatedPost, 'blog/posts', resourcePublicId);
+    
     return updatedPost;
   } catch (error) {
     console.error('Failed to update blog post:', error);
@@ -96,19 +122,43 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
 
 export async function deleteBlogPost(id: string): Promise<boolean> {
   try {
-    // Delete associated images
-    const post = await getBlogPostById(id);
-    if (post) {
-      if (post.featuredImage) {
-        const publicId = post.featuredImage.split('/').pop()?.split('.')[0];
-        if (publicId) {
-          await deleteImage(`blog/featured/${publicId}`);
+    // Get all posts to find the one with matching ID
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'blog/posts/',
+      resource_type: 'raw',
+    });
+
+    let existingPost: BlogPost | null = null;
+    let resourcePublicId: string | null = null;
+
+    for (const resource of result.resources) {
+      try {
+        const content = await getContent(resource.public_id);
+        if (content && typeof content === 'object' && 'id' in content && content.id === id) {
+          existingPost = content as BlogPost;
+          resourcePublicId = resource.public_id;
+          break;
         }
+      } catch (error) {
+        console.error(`Failed to load blog post ${resource.public_id}:`, error);
+      }
+    }
+
+    if (!existingPost || !resourcePublicId) {
+      return false;
+    }
+
+    // Delete associated images
+    if (existingPost.featuredImage) {
+      const publicId = existingPost.featuredImage.split('/').pop()?.split('.')[0];
+      if (publicId) {
+        await deleteImage(`blog/featured/${publicId}`);
       }
     }
 
     // Delete the post content
-    await cloudinary.uploader.destroy(`blog/posts/${id}`, { resource_type: 'raw' });
+    await cloudinary.uploader.destroy(resourcePublicId, { resource_type: 'raw' });
     return true;
   } catch (error) {
     console.error('Failed to delete blog post:', error);
@@ -116,11 +166,29 @@ export async function deleteBlogPost(id: string): Promise<boolean> {
   }
 }
 
-async function getBlogPostById(id: string): Promise<BlogPost | null> {
+export async function getBlogPostById(id: string): Promise<BlogPost | null> {
   try {
-    const content = await getContent(`blog/posts/${id}`);
-    return content as BlogPost;
+    // Get all posts to find the one with matching ID
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'blog/posts/',
+      resource_type: 'raw',
+    });
+
+    for (const resource of result.resources) {
+      try {
+        const content = await getContent(resource.public_id);
+        if (content && typeof content === 'object' && 'id' in content && content.id === id) {
+          return content as BlogPost;
+        }
+      } catch (error) {
+        console.error(`Failed to load blog post ${resource.public_id}:`, error);
+      }
+    }
+
+    return null;
   } catch (error) {
+    console.error('Failed to get blog post by ID:', error);
     return null;
   }
 }

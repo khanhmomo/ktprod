@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllBlogPosts, createBlogPost, initializeBlogData } from '@/lib/blog-db-persistent';
-
-// Initialize sample data on first API call
-let initialized = false;
+import { getAllBlogPosts, createBlogPost } from '@/lib/database';
 
 export async function GET(request: NextRequest) {
   try {
-    if (!initialized) {
-      await initializeBlogData();
-      initialized = true;
-    }
-    
     const posts = await getAllBlogPosts();
     return NextResponse.json(posts);
   } catch (error) {
