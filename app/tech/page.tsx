@@ -1,10 +1,9 @@
 import { Camera, Brain, Cloud, Settings, Zap, Cpu, Shield, Database, Code, Package, Network, Server } from "lucide-react";
-import { getPageContent } from "@/lib/database";
-import { loadPageContentServer } from "@/lib/server-db";
+import { getPageContent } from "@/lib/database-appwrite";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function TechPage() {
-  const pageContent = await loadPageContentServer('tech');
+  const pageContent = await getPageContent('tech');
   const content = pageContent || {
     pageTitle: "Technology Innovation",
     pageDescription: "Our research and development spans every bright idea, creating comprehensive technology platforms that transform concepts into reality.",

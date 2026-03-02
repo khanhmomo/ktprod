@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getBlogPost } from '@/lib/database';
+import { getBlogPost } from '@/lib/database-appwrite';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {

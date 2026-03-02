@@ -1,11 +1,10 @@
 import { Target, Lightbulb, Users, Award, ArrowRight } from "lucide-react";
-import { getPageContent } from "@/lib/database";
-import { loadPageContentServer } from "@/lib/server-db";
+import { getPageContent } from "@/lib/database-appwrite";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AboutPage() {
-  const pageContent = await loadPageContentServer('about');
+  const pageContent = await getPageContent('about');
   const content = pageContent || {
     pageTitle: "About KTProd Technology",
     pageDescription: "Pioneering research and development for every bright idea. We combine software innovation with hardware engineering to create comprehensive solutions for any concept that pushes technological boundaries.",

@@ -1,4 +1,4 @@
-import { getAllBlogPosts, deleteBlogPost } from "@/lib/database";
+import { getAllBlogPosts, deleteBlogPost } from "@/lib/database-appwrite";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Edit, Eye, EyeOff, Plus, Trash2 } from "lucide-react";

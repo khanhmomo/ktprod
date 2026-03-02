@@ -8,8 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { getPageContent, updatePageContent } from "@/lib/database";
-import { savePageContent, loadPageContent } from "@/lib/simple-db";
+import { getPageContent, storePageContent } from "@/lib/database-appwrite";
 import type { AboutPageContent } from "@/types/content";
 
 export default function AboutPageContent() {
@@ -28,7 +27,7 @@ export default function AboutPageContent() {
 
   const loadContent = async () => {
     try {
-      const pageContent = await loadPageContent('about');
+      const pageContent = await getPageContent('about');
       if (pageContent) {
         setContent(pageContent);
       }
@@ -42,7 +41,7 @@ export default function AboutPageContent() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await savePageContent('about', content);
+      await storePageContent('about', content);
       alert('Content saved successfully!');
     } catch (error) {
       console.error('Failed to save content:', error);

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { savePageContent, loadPageContent } from "@/lib/simple-db";
+import { getPageContent, storePageContent } from "@/lib/database-appwrite";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ export default function HomePageContent() {
 
   const loadContent = async () => {
     try {
-      const pageContent = await loadPageContent('home');
+      const pageContent = await getPageContent('home');
       if (pageContent) {
         setContent(pageContent);
       }
@@ -40,7 +40,7 @@ export default function HomePageContent() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await savePageContent('home', content);
+      await storePageContent('home', content);
       alert('Content saved successfully!');
     } catch (error) {
       console.error('Failed to save content:', error);
