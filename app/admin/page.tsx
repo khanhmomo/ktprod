@@ -1,4 +1,4 @@
-import { getAllBlogPosts } from "@/lib/database";
+import { getAllBlogPosts } from "@/lib/blog-db-persistent";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Eye, Edit, Plus, Settings, Home, FileImage, Users, Mail } from "lucide-react";
@@ -170,7 +170,7 @@ export default async function AdminDashboard() {
                   <div className="flex-1">
                     <h4 className="font-medium">{post.title}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {post.published ? "Published" : "Draft"} • {post.createdAt.toLocaleDateString()}
+                      {post.published ? "Published" : "Draft"} • {new Date(post.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <Link href={`/admin/blog/${post.id}/edit`}>

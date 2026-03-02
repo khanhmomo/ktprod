@@ -18,24 +18,24 @@ export default async function TechPage() {
       {
         id: "2",
         title: "Face Recognition Albums",
-        description: "AI-powered photo organization that automatically sorts and tags images by person",
+        description: "AI-powered systems that automatically identify and sort photos by individuals",
         features: ["Face detection", "Auto-tagging", "Smart albums", "Privacy protection"],
-      },
+      }
     ],
     hardwareSystems: [
       {
         id: "1",
-        title: "IoT Camera Systems",
-        description: "Network-connected cameras with advanced sensing and processing capabilities",
-        features: ["Wireless connectivity", "Edge processing", "Remote monitoring", "Power efficient"],
+        title: "High-Speed Camera Array",
+        description: "Custom-built camera systems designed for professional event photography",
+        specifications: ["4K resolution", "60fps capture", "Weather sealed", "Remote control"],
       },
       {
         id: "2",
-        title: "3D Printing Solutions",
-        description: "Custom 3D printing services for prototyping and manufacturing",
-        features: ["Custom designs", "Rapid prototyping", "Multiple materials", "Precision printing"],
-      },
-    ],
+        title: "Processing Server",
+        description: "Dedicated hardware for real-time image processing and delivery",
+        specifications: ["GPU acceleration", "SSD storage", "Network optimized", "Redundant power"],
+      }
+    ]
   };
 
   const infrastructure = [
@@ -88,7 +88,7 @@ export default async function TechPage() {
             </p>
           </div>
           <div className="space-y-8">
-            {content.softwareSolutions.map((solution, index) => (
+            {content.softwareSolutions.map((solution: any, index: number) => (
               <Card key={solution.id} className="overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="p-8 lg:p-12">
@@ -101,7 +101,7 @@ export default async function TechPage() {
                   <div className="lg:col-span-2 p-8 lg:p-12 bg-muted/30">
                     <h4 className="font-semibold mb-4">Key Features</h4>
                     <ul className="space-y-3">
-                      {solution.features.map((feature, featureIndex) => (
+                      {solution.features.map((feature: any, featureIndex: number) => (
                         <li key={featureIndex} className="flex items-center space-x-3">
                           <div className="h-2 w-2 bg-primary rounded-full"></div>
                           <span className="text-sm">{feature}</span>
@@ -127,7 +127,7 @@ export default async function TechPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {content.hardwareSystems.map((system, index) => (
+            {content.hardwareSystems.map((system: any, index: number) => (
               <Card key={system.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
@@ -139,7 +139,7 @@ export default async function TechPage() {
                 <CardContent>
                   <h4 className="font-semibold mb-3">Technical Specifications</h4>
                   <ul className="space-y-2">
-                    {system.features.map((feature, featureIndex) => (
+                    {system.specifications.map((feature: any, featureIndex: number) => (
                       <li key={featureIndex} className="flex items-center space-x-3">
                         <div className="h-2 w-2 bg-primary rounded-full"></div>
                         <span className="text-sm">{feature}</span>

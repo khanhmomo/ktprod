@@ -43,18 +43,22 @@ export function FileUpload({
     setIsUploading(true);
 
     try {
-      // Create a simple upload endpoint that returns a mock URL
-      // In production, this would upload to a real service
-      const formData = new FormData();
-      formData.append('file', file);
-
-      // For now, we'll create a mock URL
-      // In production, you'd upload to Cloudinary or another service
-      setTimeout(() => {
-        const mockUrl = `https://picsum.photos/800/600?random=${Date.now()}`;
-        onChange(mockUrl);
+      // Convert file to data URL
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        console.log('File uploaded successfully, data URL length:', dataUrl.length);
+        onChange(dataUrl);
         setIsUploading(false);
-      }, 1000);
+      };
+      
+      reader.onerror = () => {
+        console.error('Failed to read file');
+        alert('Failed to read file');
+        setIsUploading(false);
+      };
+      
+      reader.readAsDataURL(file);
 
     } catch (error) {
       console.error('Upload failed:', error);
@@ -107,6 +111,7 @@ export function FileUpload({
               <Button
                 variant="ghost"
                 size="sm"
+                type="button"
                 onClick={() => onChange(undefined)}
               >
                 <X className="h-4 w-4" />
@@ -141,6 +146,7 @@ export function FileUpload({
             <div>
               <Button
                 variant="outline"
+                type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isUploading}
               >
