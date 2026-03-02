@@ -40,8 +40,9 @@ export function Header() {
     };
   }, []);
 
-  // Apply white text on homepage when transparent
+  // Apply white text on homepage when transparent, red accent on other pages
   const shouldUseWhiteText = isHomepage && isAtTop;
+  const shouldUseRedAccent = !isHomepage;
 
   return (
     <header
@@ -51,7 +52,7 @@ export function Header() {
           ? "bg-background/95 backdrop-blur-sm border-b shadow-sm" 
           : isHomepage 
             ? "bg-transparent" 
-            : "bg-background/95 backdrop-blur-sm border-b"
+            : "bg-background/95 backdrop-blur-sm border-b border-primary/20 shadow-sm"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,8 +73,12 @@ export function Header() {
             <Link 
               href="/tech" 
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseWhiteText ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-sm font-medium transition-colors",
+                shouldUseWhiteText 
+                  ? "text-white hover:text-white/80" 
+                  : shouldUseRedAccent 
+                    ? "text-primary hover:text-primary/80" 
+                    : "text-foreground hover:text-primary"
               )}
             >
               Technology
@@ -81,8 +86,12 @@ export function Header() {
             <Link 
               href="/about" 
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseWhiteText ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-sm font-medium transition-colors",
+                shouldUseWhiteText 
+                  ? "text-white hover:text-white/80" 
+                  : shouldUseRedAccent 
+                    ? "text-primary hover:text-primary/80" 
+                    : "text-foreground hover:text-primary"
               )}
             >
               About
@@ -90,8 +99,12 @@ export function Header() {
             <Link 
               href="/blog" 
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseWhiteText ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-sm font-medium transition-colors",
+                shouldUseWhiteText 
+                  ? "text-white hover:text-white/80" 
+                  : shouldUseRedAccent 
+                    ? "text-primary hover:text-primary/80" 
+                    : "text-foreground hover:text-primary"
               )}
             >
               Blog
@@ -99,8 +112,12 @@ export function Header() {
             <Link 
               href="/contact" 
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseWhiteText ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-sm font-medium transition-colors",
+                shouldUseWhiteText 
+                  ? "text-white hover:text-white/80" 
+                  : shouldUseRedAccent 
+                    ? "text-primary hover:text-primary/80" 
+                    : "text-foreground hover:text-primary"
               )}
             >
               Contact
