@@ -86,7 +86,7 @@ export function getOptimizedUrl(publicId: string, options: {
 }
 
 // Store content in Cloudinary as JSON
-export async function storeContent(content: any, folder: string = 'content') {
+export async function storeContent(content: any, folder: string = 'content', publicId?: string) {
   try {
     const jsonString = JSON.stringify(content);
     const base64 = Buffer.from(jsonString).toString('base64');
@@ -96,7 +96,7 @@ export async function storeContent(content: any, folder: string = 'content') {
       folder,
       resource_type: 'raw',
       format: 'json',
-      public_id: `${folder}/${content.type || 'unknown'}-${content.id || Date.now()}`,
+      public_id: publicId || `${folder}/${content.type || 'unknown'}-${content.id || Date.now()}`,
     });
     
     return {
