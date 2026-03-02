@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.22.0",
     "@neondatabase/serverless": "^1.0.2",
     "@prisma/client": "^7.4.2",
     "@radix-ui/react-slot": "^1.2.4",
@@ -23,7 +22,6 @@
     "admin": "^1.4.1",
     "autoprefixer": "^10.4.27",
     "class-variance-authority": "^0.7.1",
-    "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "firebase": "^12.10.0",
     "lucide-react": "^0.575.0",
