@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cloudinary } from '@/lib/cloudinary';
 
-export async function GET(request: NextRequest, { params }: { params: { type: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ type: string }> }) {
   try {
     // Wait for params to be available in Next.js 15
     const { type } = await params;
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, { params }: { params: { type: st
   }
 }
 
-export async function POST(request: NextRequest, { params }: { params: { type: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ type: string }> }) {
   try {
     // Wait for params to be available in Next.js 15
     const { type } = await params;

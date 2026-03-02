@@ -103,15 +103,6 @@ export async function deleteBlogPost(id: string): Promise<boolean> {
           await deleteImage(`blog/featured/${publicId}`);
         }
       }
-      
-      if (post.images) {
-        for (const imageUrl of post.images) {
-          const publicId = imageUrl.split('/').pop()?.split('.')[0];
-          if (publicId) {
-            await deleteImage(`blog/content/${publicId}`);
-          }
-        }
-      }
     }
 
     // Delete the post content
