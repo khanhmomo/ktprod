@@ -169,50 +169,6 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Expertise Areas */}
-      <section className="bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Areas of Expertise</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our specialized knowledge and capabilities in event and sport photography technology.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Target className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">Sports Photography</h3>
-              <p className="text-muted-foreground">
-                Our roots in sports photography give us deep understanding of the challenges 
-                and opportunities in capturing fast-action moments.
-              </p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Award className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">Technology Innovation</h3>
-              <p className="text-muted-foreground">
-                Transforming photography challenges into technological solutions that benefit 
-                not just photographers, but everyone involved in events.
-              </p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Lightbulb className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">Creative Solutions</h3>
-              <p className="text-muted-foreground">
-                Bringing every bright idea to life with passion and innovation, creating practical 
-                solutions that make a real difference in people's lives.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
