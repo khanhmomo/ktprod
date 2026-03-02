@@ -185,47 +185,60 @@ export default async function AboutPage() {
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl font-bold">Meet the Founders</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              The two college students who turned their passion for photography into a technology innovation journey.
+              The three passionate innovators who combine software, hardware, and creative expertise to transform ideas into reality.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center space-y-6">
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
                 <span className="text-3xl font-bold text-primary">KT</span>
               </div>
-              <h3 className="text-2xl font-semibold">Khanh Tran</h3>
+              <h3 className="text-2xl font-semibold">Khanh Tran (Mo)</h3>
               <p className="text-muted-foreground">
-                Co-Founder & Technology Lead
+                Co-Founder & Software Lead
               </p>
               <p className="text-sm leading-relaxed">
-                Started as a sports photographer with a passion for technology. 
-                Combines technical expertise with creative vision to build innovative solutions 
-                that solve real-world challenges. Always looking for the next bright idea to transform into reality.
+                Software-focused engineer with expertise in developing robust applications 
+                and innovative algorithms. Translates complex challenges into elegant 
+                technical solutions that power our creative visions.
               </p>
             </div>
             <div className="text-center space-y-6">
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
-                <span className="text-3xl font-bold text-primary">Nép</span>
+                <span className="text-3xl font-bold text-primary">ND</span>
               </div>
-              <h3 className="text-2xl font-semibold">Phuc Neptune</h3>
+              <h3 className="text-2xl font-semibold">Nam Dao</h3>
               <p className="text-muted-foreground">
-                Co-Founder & Innovation Lead
+                Co-Founder & Hardware Lead
               </p>
               <p className="text-sm leading-relaxed">
-                Fellow sports photographer who saw the potential of technology to transform events. 
-                Brings creative problem-solving and innovation mindset to every project. 
-                Passionate about making technology accessible and beneficial for everyone.
+                Hardware specialist who bridges the physical and digital worlds. 
+                Designs and builds custom systems that bring software concepts to life 
+                through innovative engineering and practical solutions.
+              </p>
+            </div>
+            <div className="text-center space-y-6">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
+                <span className="text-3xl font-bold text-primary">MT</span>
+              </div>
+              <h3 className="text-2xl font-semibold">Minh Tran</h3>
+              <p className="text-muted-foreground">
+                Co-Founder & Creative Lead
+              </p>
+              <p className="text-sm leading-relaxed">
+                Creative visionary who brings artistic perspective to technology innovation. 
+                Ensures our solutions are not just functional but beautiful, intuitive, 
+                and focused on human-centered design experiences.
               </p>
             </div>
           </div>
           <div className="mt-16 text-center">
             <div className="bg-card rounded-2xl p-8 shadow-lg max-w-2xl mx-auto">
-              <h4 className="text-xl font-semibold mb-4">Our Partnership</h4>
+              <h4 className="text-xl font-semibold mb-4">Our Collaboration</h4>
               <p className="text-muted-foreground leading-relaxed">
-                From college sports photographers to technology innovators, we've combined our 
-                passion for photography with our love for innovation. Together, we're dedicated 
-                to bringing every bright idea to life and creating technology that makes a real 
-                difference in people's lives.
+                Together, we combine software expertise, hardware innovation, and creative vision 
+                to transform every bright idea into reality. Our diverse perspectives create 
+                comprehensive solutions that make technology accessible and impactful for everyone.
               </p>
             </div>
           </div>
