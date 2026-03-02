@@ -179,6 +179,59 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Meet the Founders */}
+      <section className="bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl font-bold">Meet the Founders</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              The two college students who turned their passion for photography into a technology innovation journey.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="text-center space-y-6">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
+                <span className="text-3xl font-bold text-primary">KT</span>
+              </div>
+              <h3 className="text-2xl font-semibold">Khanh Tran</h3>
+              <p className="text-muted-foreground">
+                Co-Founder & Technology Lead
+              </p>
+              <p className="text-sm leading-relaxed">
+                Started as a sports photographer with a passion for technology. 
+                Combines technical expertise with creative vision to build innovative solutions 
+                that solve real-world challenges. Always looking for the next bright idea to transform into reality.
+              </p>
+            </div>
+            <div className="text-center space-y-6">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 mx-auto mb-6 flex items-center justify-center">
+                <span className="text-3xl font-bold text-primary">Nép</span>
+              </div>
+              <h3 className="text-2xl font-semibold">Phuc Neptune</h3>
+              <p className="text-muted-foreground">
+                Co-Founder & Innovation Lead
+              </p>
+              <p className="text-sm leading-relaxed">
+                Fellow sports photographer who saw the potential of technology to transform events. 
+                Brings creative problem-solving and innovation mindset to every project. 
+                Passionate about making technology accessible and beneficial for everyone.
+              </p>
+            </div>
+          </div>
+          <div className="mt-16 text-center">
+            <div className="bg-card rounded-2xl p-8 shadow-lg max-w-2xl mx-auto">
+              <h4 className="text-xl font-semibold mb-4">Our Partnership</h4>
+              <p className="text-muted-foreground leading-relaxed">
+                From college sports photographers to technology innovators, we've combined our 
+                passion for photography with our love for innovation. Together, we're dedicated 
+                to bringing every bright idea to life and creating technology that makes a real 
+                difference in people's lives.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
