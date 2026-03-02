@@ -40,9 +40,8 @@ export function Header() {
     };
   }, []);
 
-  // Apply white text on homepage when transparent, red accent on other pages
+  // Apply white text on homepage when transparent, normal colors on other pages
   const shouldUseWhiteText = isHomepage && isAtTop && !isMenuOpen;
-  const shouldUseRedAccent = !isHomepage;
 
   return (
     <>
@@ -77,9 +76,7 @@ export function Header() {
                   "text-sm font-medium transition-colors",
                   shouldUseWhiteText 
                     ? "text-white hover:text-white/80" 
-                    : shouldUseRedAccent 
-                      ? "text-primary hover:text-primary/80" 
-                      : "text-foreground hover:text-primary"
+                    : "text-foreground hover:text-primary"
                 )}
               >
                 Technology
@@ -90,9 +87,7 @@ export function Header() {
                   "text-sm font-medium transition-colors",
                   shouldUseWhiteText 
                     ? "text-white hover:text-white/80" 
-                    : shouldUseRedAccent 
-                      ? "text-primary hover:text-primary/80" 
-                      : "text-foreground hover:text-primary"
+                    : "text-foreground hover:text-primary"
                 )}
               >
                 About
@@ -103,9 +98,7 @@ export function Header() {
                   "text-sm font-medium transition-colors",
                   shouldUseWhiteText 
                     ? "text-white hover:text-white/80" 
-                    : shouldUseRedAccent 
-                      ? "text-primary hover:text-primary/80" 
-                      : "text-foreground hover:text-primary"
+                    : "text-foreground hover:text-primary"
                 )}
               >
                 Blog
@@ -116,9 +109,7 @@ export function Header() {
                   "text-sm font-medium transition-colors",
                   shouldUseWhiteText 
                     ? "text-white hover:text-white/80" 
-                    : shouldUseRedAccent 
-                      ? "text-primary hover:text-primary/80" 
-                      : "text-foreground hover:text-primary"
+                    : "text-foreground hover:text-primary"
                 )}
               >
                 Contact
