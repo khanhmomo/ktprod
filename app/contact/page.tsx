@@ -1,6 +1,5 @@
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
-import { getPageContent } from "@/lib/database";
-import { loadPageContentServer } from "@/lib/server-db";
+import { getPageContent } from "@/lib/database-appwrite";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 export default async function ContactPage() {
-  const pageContent = await loadPageContentServer('contact');
+  const pageContent = await getPageContent('contact');
   const content = pageContent || {
     pageTitle: "Contact Us",
     pageDescription: "Get in touch with our team to discuss your project or learn more about our innovative technology solutions.",
