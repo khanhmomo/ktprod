@@ -58,7 +58,7 @@ export default async function AboutPage() {
     },
     {
       year: "What's Next?",
-      title: "Still Innovating",
+      title: "Innovation Continues",
       description: "Our journey continues as we push boundaries, explore new possibilities, and keep bringing creative ideas to life with technology that makes a difference.",
     },
   ];
@@ -152,23 +152,28 @@ export default async function AboutPage() {
           <div className="relative">
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border"></div>
             <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? "justify-start" : "justify-end"
-                  }`}
-                >
-                  <div className={`w-5/12 ${index % 2 === 0 ? "text-right pr-8" : "text-left pl-8"}`}>
-                    <div className="bg-card rounded-2xl p-6 shadow-lg">
-                      <div className="text-sm font-semibold text-primary mb-2">{item.year}</div>
-                      <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+              {timeline.map((item, index) => {
+                const isLastItem = index === timeline.length - 1;
+                return (
+                  <div
+                    key={index}
+                    className={`relative flex items-center ${
+                      isLastItem ? "justify-center" : (index % 2 === 0 ? "justify-start" : "justify-end")
+                    }`}
+                  >
+                    <div className={`${isLastItem ? "w-full max-w-2xl text-center" : "w-5/12"} ${isLastItem ? "" : (index % 2 === 0 ? "text-right pr-8" : "text-left pl-8")}`}>
+                      <div className="bg-card rounded-2xl p-6 shadow-lg">
+                        <div className="text-sm font-semibold text-primary mb-2">{item.year}</div>
+                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                      </div>
                     </div>
+                    {!isLastItem && (
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                    )}
                   </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
