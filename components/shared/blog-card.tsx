@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, Play, User, Tag } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BlogPost } from "@/types/content";
+import { BlogPost } from "@/types/blog";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -14,9 +14,9 @@ export function BlogCard({ post }: BlogCardProps) {
     <Link href={`/blog/${post.slug}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
         <div className="relative aspect-video overflow-hidden">
-          {post.featuredImage ? (
+          {(post.coverImage || post.featuredImage) ? (
             <Image
-              src={post.featuredImage}
+              src={post.coverImage || post.featuredImage || ''}
               alt={post.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -54,7 +54,7 @@ export function BlogCard({ post }: BlogCardProps) {
         
         <CardContent className="pt-0">
           <CardDescription className="line-clamp-3">
-            {post.excerpt}
+            {post.excerpt || post.description}
           </CardDescription>
         </CardContent>
       </Card>

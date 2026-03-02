@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getBlogPostBySlug } from '@/lib/blog-db-persistent';
+import { getBlogPost } from '@/lib/database';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const { slug } = await params;
-    const post = await getBlogPostBySlug(slug);
+    const post = await getBlogPost(slug);
     
     if (!post) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
