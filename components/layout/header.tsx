@@ -153,7 +153,7 @@ export function Header() {
         </div>
       </header>
       
-      {/* Mobile menu - slide in from right */}
+      {/* Mobile menu - full screen slide from right */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           {/* Backdrop */}
@@ -162,12 +162,12 @@ export function Header() {
             onClick={() => setIsMenuOpen(false)}
           />
           
-          {/* Menu panel */}
+          {/* Full screen menu panel */}
           <div className={cn(
-            "absolute top-0 right-0 h-full w-80 max-w-[85vw] transform transition-transform duration-300 ease-in-out",
+            "absolute top-0 right-0 h-full w-full transform transition-transform duration-300 ease-in-out",
             shouldUseWhiteText 
-              ? "bg-black/90 border-l border-white/20" 
-              : "bg-background border-l border-border"
+              ? "bg-black/95" 
+              : "bg-background"
           )}>
             <div className="flex flex-col h-full justify-center">
               {/* Close button */}
@@ -175,20 +175,20 @@ export function Header() {
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className={cn(
-                    "p-2 rounded-md transition-colors",
+                    "p-3 rounded-md transition-colors",
                     shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
                   )}
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 </button>
               </div>
               
               {/* Menu content - centered */}
-              <nav className="px-8 space-y-4">
+              <nav className="px-8 space-y-6">
                 <Link
                   href="/tech"
                   className={cn(
-                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
+                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -200,7 +200,7 @@ export function Header() {
                 <Link
                   href="/about"
                   className={cn(
-                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
+                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -212,7 +212,7 @@ export function Header() {
                 <Link
                   href="/blog"
                   className={cn(
-                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
+                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -224,7 +224,7 @@ export function Header() {
                 <Link
                   href="/contact"
                   className={cn(
-                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
+                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
