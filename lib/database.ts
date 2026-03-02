@@ -117,6 +117,14 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
       updatedAt: new Date(),
     };
 
+    // If title was updated, regenerate the slug
+    if (updates.title && updates.title !== existingPost.title) {
+      updatedPost.slug = updates.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+    }
+
     // Update the content in Cloudinary using the same public_id
     await storeContent(updatedPost, 'blog/posts', resourcePublicId);
     
