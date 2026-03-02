@@ -152,32 +152,32 @@ export function Header() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t bg-card backdrop-blur-sm">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-4 border-t bg-background backdrop-blur-sm border-border">
+            <nav className="flex flex-col space-y-2">
               <Link
                 href="/tech"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-2 rounded-md hover:bg-muted/50"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Technology
               </Link>
               <Link
                 href="/about"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-2 rounded-md hover:bg-muted/50"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
                 href="/blog"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-2 rounded-md hover:bg-muted/50"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
               </Link>
               <Link
                 href="/contact"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-2 rounded-md hover:bg-muted/50"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
