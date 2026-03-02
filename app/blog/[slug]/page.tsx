@@ -19,7 +19,10 @@ export async function generateStaticParams() {
     const { getAllBlogPosts } = await import("@/lib/database");
     const posts = await getAllBlogPosts();
     
-    return posts.map((post: any) => ({
+    // Filter out posts without valid slugs
+    const validPosts = posts.filter((post: any) => post && post.slug && typeof post.slug === 'string');
+    
+    return validPosts.map((post: any) => ({
       slug: post.slug,
     }));
   } catch (error) {
@@ -180,7 +183,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {post.videoUrl && (
           <section>
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <VideoEmbed url={post.videoUrl} />
+              <VideoEmbed url={post.videoUrl} title={post.title} />
             </div>
           </section>
         )}
