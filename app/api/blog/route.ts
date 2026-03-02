@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllBlogPosts, createBlogPost } from '@/lib/database';
+import { getAllBlogPosts, createBlogPost } from '@/lib/database-postgres';
 
 export async function GET(request: NextRequest) {
   try {

@@ -16,7 +16,7 @@ interface BlogPostPageProps {
 export async function generateStaticParams() {
   try {
     // Use Cloudinary database instead of local file
-    const { getAllBlogPosts } = await import("@/lib/database");
+    const { getAllBlogPosts } = await import("@/lib/database-postgres");
     const posts = await getAllBlogPosts();
     
     // Filter out posts without valid slugs
@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   
   try {
-    // Use Cloudinary database instead of local file
-    const { getBlogPost } = await import("@/lib/database");
+    // Use PostgreSQL database
+    const { getBlogPost } = await import("@/lib/database-postgres");
     const post = await getBlogPost(slug);
     
     if (!post) {
@@ -132,8 +132,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   
   try {
-    // Use Cloudinary database instead of local file
-    const { getBlogPost } = await import("@/lib/database");
+    // Use PostgreSQL database
+    const { getBlogPost } = await import("@/lib/database-postgres");
     const post = await getBlogPost(slug);
     
     if (!post) {

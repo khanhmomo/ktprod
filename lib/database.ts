@@ -1,9 +1,86 @@
-import { cloudinary, uploadImage, deleteImage, storeContent, getContent } from './cloudinary';
-import { BlogPost, PageContent, HomePageContent, AboutPageContent, TechPageContent, ContactPageContent } from '@/types/content';
+import { v2 as cloudinary } from 'cloudinary';
+import { BlogPost } from '@/types/blog';
+import { getContent, storeContent, deleteImage, uploadImage } from '@/lib/cloudinary';
+
+// Type definitions for page content
+interface PageContent {
+  id: string;
+  type: 'home' | 'about' | 'tech' | 'contact';
+  title: string;
+  description: string;
+  content: Record<string, any>;
+  images?: Record<string, string>;
+  updatedAt: Date;
+}
+
+interface HomePageContent {
+  heroTitle: string;
+  heroDescription: string;
+  ctaButtonText: string;
+  secondaryButtonText: string;
+  featuredVideo?: string;
+}
+
+interface AboutPageContent {
+  pageTitle: string;
+  pageDescription: string;
+  companyStory: string;
+  missionStatement: string;
+  teamMembers?: any[];
+}
+
+interface TechPageContent {
+  pageTitle: string;
+  pageDescription: string;
+  softwareSolutions: any[];
+  hardwareSystems: any[];
+}
+
+interface ContactPageContent {
+  pageTitle: string;
+  pageDescription: string;
+  email: string;
+  phone: string;
+  address: string;
+  formTitle: string;
+  formDescription: string;
+}
+
+// Simple in-memory cache with 5-minute TTL
+const cache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getFromCache(key: string): any | null {
+  const cached = cache.get(key);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  if (cached) {
+    cache.delete(key);
+  }
+  return null;
+}
+
+function setCache(key: string, data: any): void {
+  cache.set(key, { data, timestamp: Date.now() });
+}
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 // Blog Posts Management
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   try {
+    const cachedPosts = getFromCache('all-blog-posts');
+    if (cachedPosts) {
+      return cachedPosts;
+    }
+
     const result = await cloudinary.api.resources({
       type: 'upload',
       prefix: 'blog/posts/',
@@ -24,7 +101,9 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
       }
     }
 
-    return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const sortedPosts = posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    setCache('all-blog-posts', sortedPosts);
+    return sortedPosts;
   } catch (error) {
     console.error('Failed to get blog posts:', error);
     return [];
@@ -33,6 +112,11 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
+    const cachedPost = getFromCache(`blog-post-${slug}`);
+    if (cachedPost) {
+      return cachedPost;
+    }
+
     const result = await cloudinary.api.resources({
       type: 'upload',
       prefix: 'blog/posts/',
@@ -45,6 +129,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         if (content && typeof content === 'object' && 'slug' in content) {
           const post = content as BlogPost;
           if (post.slug === slug) {
+            setCache(`blog-post-${slug}`, post);
             return post;
           }
         }
