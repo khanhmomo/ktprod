@@ -11,9 +11,9 @@ export default async function ContactPage() {
   const content = pageContent || {
     pageTitle: "Contact Us",
     pageDescription: "Get in touch with our team to discuss your project or learn more about our innovative technology solutions.",
-    email: "info@ktprodtechnology.com",
-    phone: "+1 (555) 123-4567",
-    address: "123 Innovation Drive, Tech City, TC 12345",
+    email: "khanhtranproduction@gmail.com",
+    phone: "+1 (361) 218-1470",
+    address: "11423 Bandlon Dr, Houston, Texas 77072, United States",
     formTitle: "Send us a message",
     formDescription: "Have a question or want to start a project? Fill out the form below and we'll get back to you within 24 hours.",
   };
