@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   
   try {
-    // Use Firebase database
-    const { getBlogPost } = await import("@/lib/database-firebase");
+    // Use Appwrite database
+    const { getBlogPost } = await import("@/lib/database-appwrite");
     const post = await getBlogPost(slug);
     
     if (!post) {
@@ -132,8 +132,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   
   try {
-    // Use Firebase database
-    const { getBlogPost } = await import("@/lib/database-firebase");
+    // Use Appwrite database
+    const { getBlogPost } = await import("@/lib/database-appwrite");
     const post = await getBlogPost(slug);
     
     if (!post) {

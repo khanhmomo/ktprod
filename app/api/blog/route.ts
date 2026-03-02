@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllBlogPosts, createBlogPost } from '@/lib/database-firebase';
+import { getAllBlogPosts, createBlogPost } from '@/lib/database-appwrite';
 
 export async function GET(request: NextRequest) {
   try {

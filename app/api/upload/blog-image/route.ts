@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { uploadImage } from '@/lib/database-firebase';
+import { uploadImage } from '@/lib/database-appwrite';
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,14 +39,14 @@ export async function POST(request: NextRequest) {
 
     console.log(`Uploading blog image: ${filename}`);
 
-    // Upload to Firebase Storage
+    // Upload to Appwrite Storage
     const result = await uploadImage(file, 'blog');
 
-    console.log(`Successfully uploaded blog image: ${result.path}`);
+    console.log(`Successfully uploaded blog image: ${result.fileId}`);
 
     return NextResponse.json({
       url: result.url,
-      publicId: result.path,
+      publicId: result.fileId,
     });
   } catch (error) {
     console.error('Failed to upload blog image:', error);
