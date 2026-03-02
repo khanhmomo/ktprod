@@ -195,7 +195,7 @@ export default async function AboutPage() {
               </div>
               <h3 className="text-2xl font-semibold">Khanh Tran (Mo)</h3>
               <p className="text-muted-foreground">
-                Co-Founder & Software Lead
+                Software Lead
               </p>
               <p className="text-sm leading-relaxed">
                 Software-focused engineer with expertise in developing robust applications 
@@ -209,7 +209,7 @@ export default async function AboutPage() {
               </div>
               <h3 className="text-2xl font-semibold">Nam Dao</h3>
               <p className="text-muted-foreground">
-                Co-Founder & Hardware Lead
+                Hardware Lead
               </p>
               <p className="text-sm leading-relaxed">
                 Hardware specialist who bridges the physical and digital worlds. 
@@ -223,7 +223,7 @@ export default async function AboutPage() {
               </div>
               <h3 className="text-2xl font-semibold">Minh Tran</h3>
               <p className="text-muted-foreground">
-                Co-Founder & Creative Lead
+                Creative Lead
               </p>
               <p className="text-sm leading-relaxed">
                 Creative visionary who brings artistic perspective to technology innovation. 
