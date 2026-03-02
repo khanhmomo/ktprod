@@ -12,8 +12,8 @@ interface BlogCardProps {
 export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
-      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
-        <div className="relative aspect-video overflow-hidden">
+      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group h-full flex flex-col">
+        <div className="relative aspect-video overflow-hidden flex-shrink-0">
           {(post.coverImage || post.featuredImage) ? (
             <Image
               src={post.coverImage || post.featuredImage || ''}
@@ -26,7 +26,7 @@ export function BlogCard({ post }: BlogCardProps) {
           )}
         </div>
         
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-3 flex-grow">
           <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
             <div className="flex items-center space-x-4">
               {post.category && (
@@ -52,7 +52,7 @@ export function BlogCard({ post }: BlogCardProps) {
           </CardTitle>
         </CardHeader>
         
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 flex-shrink-0">
           <CardDescription className="line-clamp-3">
             {post.excerpt || post.description}
           </CardDescription>
