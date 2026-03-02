@@ -470,6 +470,7 @@ export default function EditBlogPost({ params }: EditBlogPostProps) {
                       <option value="General">General</option>
                       <option value="R&D">R&D</option>
                       <option value="Tech News">Tech News</option>
+                      <option value="Creative">Creative</option>
                     </select>
                   </div>
                 </div>
