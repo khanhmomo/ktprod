@@ -82,18 +82,26 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
     // Add cover image if available, otherwise use default
     const defaultImageUrl = `${baseUrl}/images/social-default.jpg`;
-    const imageUrl = post.featuredImage || defaultImageUrl;
+    const imageUrl = post.coverImage || post.featuredImage || defaultImageUrl;
+    
+    // Ensure absolute URL for Facebook
+    const absoluteImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
+    
+    console.log('Metadata image URL:', absoluteImageUrl);
+    console.log('Cover image:', post.coverImage);
+    console.log('Featured image:', post.featuredImage);
     
     metadata.openGraph.images = [
       {
-        url: imageUrl,
+        url: absoluteImageUrl,
         width: 1200,
         height: 630,
         alt: post.title,
       },
     ];
     
-    metadata.twitter.images = [imageUrl];
+    metadata.twitter.card = 'summary_large_image';
+    metadata.twitter.images = [absoluteImageUrl];
 
     return metadata;
   } catch (error) {
