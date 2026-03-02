@@ -60,13 +60,20 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export async function createBlogPost(post: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'>): Promise<BlogPost> {
+export async function createBlogPost(post: Omit<BlogPost, 'id' | 'slug' | 'createdAt' | 'updatedAt'>): Promise<BlogPost> {
   const id = Date.now().toString();
   const now = new Date();
+  
+  // Generate slug from title
+  const slug = post.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
   
   const newPost: BlogPost = {
     ...post,
     id,
+    slug,
     createdAt: now,
     updatedAt: now,
   };

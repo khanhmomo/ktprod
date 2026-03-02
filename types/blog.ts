@@ -3,9 +3,13 @@ export interface BlogPost {
   title: string;
   slug: string;
   description: string;
+  excerpt?: string;
   content: string;
   coverImage?: string;
+  featuredImage?: string; // For backward compatibility
   videoUrl?: string;
+  author?: string;
+  category?: string;
   published: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -15,8 +19,13 @@ export interface BlogPost {
 export interface BlogPostInput {
   title: string;
   description: string;
+  excerpt?: string;
   content: string;
   coverImage?: string;
+  featuredImage?: string; // For backward compatibility
   videoUrl?: string;
+  author?: string;
+  category?: string;
   published: boolean;
+  publishedAt?: string;
 }

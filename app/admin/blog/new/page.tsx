@@ -19,7 +19,7 @@ export default function NewBlogPostPage() {
     title: "",
     description: "",
     content: "",
-    featuredImage: "",
+    coverImage: "",
     videoUrl: "",
     author: "",
     category: "General" as 'General' | 'Tech News' | 'R&D',
@@ -172,8 +172,8 @@ export default function NewBlogPostPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <FileUpload
-                  value={formData.featuredImage}
-                  onChange={(url: string | undefined) => handleChange('featuredImage', url || '')}
+                  value={formData.coverImage}
+                  onChange={(url: string | undefined) => handleChange('coverImage', url || '')}
                   label="Cover Image"
                 />
                 
