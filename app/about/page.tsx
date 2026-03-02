@@ -232,16 +232,6 @@ export default async function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="mt-16 text-center">
-            <div className="bg-card rounded-2xl p-8 shadow-lg max-w-2xl mx-auto">
-              <h4 className="text-xl font-semibold mb-4">Our Collaboration</h4>
-              <p className="text-muted-foreground leading-relaxed">
-                Together, we combine software expertise, hardware innovation, and creative vision 
-                to transform every bright idea into reality. Our diverse perspectives create 
-                comprehensive solutions that make technology accessible and impactful for everyone.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
