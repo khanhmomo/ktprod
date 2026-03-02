@@ -8,9 +8,9 @@ export default async function AboutPage() {
   const pageContent = await getPageContent('about');
   const content = pageContent || {
     pageTitle: "About KTProd Technology",
-    pageDescription: "A technology company dedicated to innovation, transforming creative challenges into technological solutions that benefit everyone.",
-    companyStory: "KTProd Technology was founded with a vision to bridge the gap between creative ideas and technological innovation. We specialize in developing comprehensive solutions that combine software engineering, hardware design, and creative applications. Our team is passionate about solving complex challenges and transforming innovative concepts into practical, real-world solutions that make a meaningful impact across various industries and applications.",
-    missionStatement: "To empower people with innovative technology that transforms creative challenges into opportunities, making advanced solutions accessible to everyone.",
+    pageDescription: "An R&D team dedicated to innovation, transforming bright ideas into technological solutions that benefit everyone.",
+    companyStory: "We are a passionate R&D team that loves bringing innovative ideas to life. Our focus is on bridging the gap between creative concepts and practical technology solutions. We combine expertise in software engineering, hardware design, and creative applications to solve complex challenges and transform bright ideas into real-world solutions that make a meaningful impact across various domains and industries.",
+    missionStatement: "To empower innovation by transforming creative challenges into technological opportunities, making advanced solutions accessible to everyone.",
   };
 
   const values = [
