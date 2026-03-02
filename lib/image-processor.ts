@@ -1,3 +1,7 @@
+// Helper function to get dynamic upload URL
+function getUploadUrl() {
+  return `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/upload`;
+}
 // Helper function to extract and upload images from HTML content (server-side)
 export async function processImagesInContent(content: string): Promise<string> {
   console.log('Starting image processing for content length:', content.length);
@@ -47,7 +51,7 @@ export async function processImagesInContent(content: string): Promise<string> {
       formData.append('file', file);
       formData.append('folder', 'blog/content');
       
-      const response = await fetch('http://localhost:3000/api/upload', {
+      const response = await fetch(getUploadUrl(), {
         method: 'POST',
         body: formData,
       });
@@ -139,7 +143,7 @@ export async function processImagesInContentOptimized(content: string, existingC
       formData.append('file', file);
       formData.append('folder', 'blog/content');
       
-      const response = await fetch('http://localhost:3000/api/upload', {
+      const response = await fetch(getUploadUrl(), {
         method: 'POST',
         body: formData,
       });
@@ -191,7 +195,7 @@ export async function uploadCoverImage(base64String: string): Promise<string | n
     formData.append('file', file);
     formData.append('folder', 'blog/covers');
     
-    const response = await fetch('http://localhost:3000/api/upload', {
+    const response = await fetch(getUploadUrl(), {
       method: 'POST',
       body: formData,
     });

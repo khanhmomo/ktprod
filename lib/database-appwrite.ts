@@ -3,7 +3,7 @@ import { BlogPost } from '@/types/blog';
 
 // Initialize Appwrite Client
 const client = new Client()
-  .setEndpoint(process.env.APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+  .setEndpoint(process.env.APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1')
   .setProject(process.env.APPWRITE_PROJECT_ID || '');
 
 const databases = new Databases(client);
@@ -18,11 +18,18 @@ const BUCKET_ID = process.env.APPWRITE_BUCKET_ID || 'blog-images';
 // Blog Posts Management
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   try {
+    console.log('Fetching blog posts from Appwrite...');
+    console.log('Database ID:', DATABASE_ID);
+    console.log('Collection ID:', BLOG_POSTS_COLLECTION_ID);
+    console.log('Endpoint:', process.env.APPWRITE_ENDPOINT);
+    
     const response = await databases.listDocuments(
       DATABASE_ID,
       BLOG_POSTS_COLLECTION_ID
     );
 
+    console.log(`Found ${response.documents.length} blog posts`);
+    
     return response.documents.map((doc: any) => ({
       id: doc.$id,
       title: doc.title,
@@ -43,6 +50,13 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     }));
   } catch (error: any) {
     console.error('Failed to get blog posts:', error);
+    console.error('Error details:', error.message);
+    console.error('Environment check:', {
+      endpoint: process.env.APPWRITE_ENDPOINT,
+      projectId: process.env.APPWRITE_PROJECT_ID,
+      databaseId: process.env.APPWRITE_DATABASE_ID,
+      collectionId: process.env.APPWRITE_BLOG_POSTS_COLLECTION_ID
+    });
     // Return empty array if Appwrite is not accessible or tables not set up
     return [];
   }
