@@ -169,10 +169,9 @@ export function Header() {
               ? "bg-black/90 border-l border-white/20" 
               : "bg-background border-l border-border"
           )}>
-            <div className="flex flex-col h-full">
-              {/* Menu header */}
-              <div className="flex items-center justify-between p-4 border-b border-current/20">
-                <span className="text-sm font-medium">Menu</span>
+            <div className="flex flex-col h-full justify-center">
+              {/* Close button */}
+              <div className="absolute top-4 right-4">
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className={cn(
@@ -184,12 +183,12 @@ export function Header() {
                 </button>
               </div>
               
-              {/* Menu content */}
-              <nav className="flex-1 p-4 space-y-2">
+              {/* Menu content - centered */}
+              <nav className="px-8 space-y-4">
                 <Link
                   href="/tech"
                   className={cn(
-                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -201,7 +200,7 @@ export function Header() {
                 <Link
                   href="/about"
                   className={cn(
-                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -213,7 +212,7 @@ export function Header() {
                 <Link
                   href="/blog"
                   className={cn(
-                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
@@ -225,7 +224,7 @@ export function Header() {
                 <Link
                   href="/contact"
                   className={cn(
-                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    "text-lg font-medium transition-colors px-4 py-3 rounded-md block text-center",
                     shouldUseWhiteText 
                       ? "text-white hover:bg-white/20" 
                       : "text-foreground hover:bg-accent"
