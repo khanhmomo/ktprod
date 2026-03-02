@@ -89,7 +89,7 @@ export function TinyMCEEditor({
         value={content}
         onEditorChange={handleEditorChange}
         init={initConfig}
-        apiKey="h6qwqnt5eitadjhkqg7f0qaplj0nav40q34usptnz3t0o2kr"
+        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY || "h6qwqnt5eitadjhkqg7f0qaplj0nav40q34usptnz3t0o2kr"}
       />
     </div>
   );
