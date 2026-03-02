@@ -105,7 +105,7 @@ export default function NewBlogPostPage() {
     coverImage: "",
     videoUrl: "",
     author: "",
-    category: "General" as 'General' | 'Tech News' | 'R&D',
+    category: "General" as 'General' | 'Tech News' | 'R&D' | 'Creative',
     published: false,
     publishedAt: new Date().toISOString(),
   });
@@ -235,6 +235,7 @@ export default function NewBlogPostPage() {
                       <option value="General">General</option>
                       <option value="R&D">R&D</option>
                       <option value="Tech News">Tech News</option>
+                      <option value="Creative">Creative</option>
                     </select>
                   </div>
                 </div>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BlogPost } from "@/types/blog";
 
-const categories = ['All', 'General', 'Tech News', 'R&D'] as const;
+const categories = ['All', 'General', 'Tech News', 'R&D', 'Creative'] as const;
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
