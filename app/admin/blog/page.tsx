@@ -5,6 +5,10 @@ import { FileText, Edit, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+// Force dynamic rendering and disable caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminBlogPage() {
   const posts = await getAllBlogPosts();
 

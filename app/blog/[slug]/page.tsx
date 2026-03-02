@@ -13,23 +13,24 @@ interface BlogPostPageProps {
   }>;
 }
 
-export async function generateStaticParams() {
-  try {
-    // Use Appwrite database
-    const { getAllBlogPosts } = await import("@/lib/database-appwrite");
-    const posts = await getAllBlogPosts();
-    
-    // Filter out posts without valid slugs
-    const validPosts = posts.filter((post: any) => post && post.slug && typeof post.slug === 'string');
-    
-    return validPosts.map((post: any) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.error('Failed to generate static params:', error);
-    return [];
-  }
-}
+// Remove static generation to force dynamic rendering
+// export async function generateStaticParams() {
+//   try {
+//     // Use Appwrite database
+//     const { getAllBlogPosts } = await import("@/lib/database-appwrite");
+//     const posts = await getAllBlogPosts();
+//     
+//     // Filter out posts without valid slugs
+//     const validPosts = posts.filter((post: any) => post && post.slug && typeof post.slug === 'string');
+//     
+//     return validPosts.map((post: any) => ({
+//       slug: post.slug,
+//     }));
+//   } catch (error) {
+//     console.error('Failed to generate static params:', error);
+//     return [];
+//   }
+// }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   // Await params in Next.js 16
@@ -104,8 +105,9 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 }
 
-// Force dynamic rendering
+// Force dynamic rendering and disable caching
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // Reconstruct content with images from markers
 const reconstructContentWithImages = (baseContent: string, markers: ImageMarker[] = []) => {

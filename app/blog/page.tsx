@@ -2,6 +2,10 @@ import { getAllBlogPosts } from "@/lib/database-appwrite";
 import { BlogCard } from "@/components/shared/blog-card";
 import Link from "next/link";
 
+// Force dynamic rendering and disable caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
 
