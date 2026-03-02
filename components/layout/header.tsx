@@ -153,65 +153,89 @@ export function Header() {
         </div>
       </header>
       
-      {/* Mobile menu - outside header container */}
+      {/* Mobile menu - slide in from right */}
       {isMenuOpen && (
-        <div className={cn(
-          "md:hidden py-4 border-t backdrop-blur-sm",
-          shouldUseWhiteText 
-            ? "bg-black/80 border-white/20" 
-            : "bg-background border-border"
-        )}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex flex-col space-y-2">
-              <Link
-                href="/tech"
-                className={cn(
-                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
-                  shouldUseWhiteText 
-                    ? "text-white hover:bg-white/20" 
-                    : "text-foreground hover:bg-accent"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Technology
-              </Link>
-              <Link
-                href="/about"
-                className={cn(
-                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
-                  shouldUseWhiteText 
-                    ? "text-white hover:bg-white/20" 
-                    : "text-foreground hover:bg-accent"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link
-                href="/blog"
-                className={cn(
-                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
-                  shouldUseWhiteText 
-                    ? "text-white hover:bg-white/20" 
-                    : "text-foreground hover:bg-accent"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/contact"
-                className={cn(
-                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
-                  shouldUseWhiteText 
-                    ? "text-white hover:bg-white/20" 
-                    : "text-foreground hover:bg-accent"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-            </nav>
+        <div className="fixed inset-0 z-40 md:hidden">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          
+          {/* Menu panel */}
+          <div className={cn(
+            "absolute top-0 right-0 h-full w-80 max-w-[85vw] transform transition-transform duration-300 ease-in-out",
+            shouldUseWhiteText 
+              ? "bg-black/90 border-l border-white/20" 
+              : "bg-background border-l border-border"
+          )}>
+            <div className="flex flex-col h-full">
+              {/* Menu header */}
+              <div className="flex items-center justify-between p-4 border-b border-current/20">
+                <span className="text-sm font-medium">Menu</span>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className={cn(
+                    "p-2 rounded-md transition-colors",
+                    shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
+                  )}
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              {/* Menu content */}
+              <nav className="flex-1 p-4 space-y-2">
+                <Link
+                  href="/tech"
+                  className={cn(
+                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    shouldUseWhiteText 
+                      ? "text-white hover:bg-white/20" 
+                      : "text-foreground hover:bg-accent"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Technology
+                </Link>
+                <Link
+                  href="/about"
+                  className={cn(
+                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    shouldUseWhiteText 
+                      ? "text-white hover:bg-white/20" 
+                      : "text-foreground hover:bg-accent"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/blog"
+                  className={cn(
+                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    shouldUseWhiteText 
+                      ? "text-white hover:bg-white/20" 
+                      : "text-foreground hover:bg-accent"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    "text-sm font-medium transition-colors px-4 py-3 rounded-md block",
+                    shouldUseWhiteText 
+                      ? "text-white hover:bg-white/20" 
+                      : "text-foreground hover:bg-accent"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+              </nav>
+            </div>
           </div>
         </div>
       )}
