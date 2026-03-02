@@ -26,7 +26,7 @@ export function FounderPhoto({ src, alt, fallback }: FounderPhotoProps) {
         src={src}
         alt={alt}
         fill
-        className="object-cover"
+        className="object-cover grayscale"
         onError={() => setImageError(true)}
       />
     </div>
