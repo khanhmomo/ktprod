@@ -82,14 +82,14 @@ export default async function AboutPage() {
 
       {/* Company Values */}
       <section>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Our Core Values</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Our Core Values</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
               The principles that guide our research, development, and company culture.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {values.map((value, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -111,27 +111,27 @@ export default async function AboutPage() {
 
       {/* Company Story */}
       <section className="bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Our Story</h2>
-              <p className="text-lg text-muted-foreground whitespace-pre-line">
+              <h2 className="text-2xl md:text-3xl font-bold">Our Story</h2>
+              <p className="text-lg text-muted-foreground whitespace-pre-line px-4 md:px-0">
                 {content.companyStory}
               </p>
             </div>
-            <div className="bg-card rounded-2xl p-8 shadow-lg">
+            <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg">
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">Innovation</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">Innovation</div>
                   <div className="text-sm text-muted-foreground">At the core of everything we do</div>
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">Software</div>
+                    <div className="text-xl md:text-2xl font-bold text-primary">Software</div>
                     <div className="text-sm text-muted-foreground">Advanced algorithms</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">Hardware</div>
+                    <div className="text-xl md:text-2xl font-bold text-primary">Hardware</div>
                     <div className="text-sm text-muted-foreground">Custom solutions</div>
                   </div>
                 </div>
@@ -143,34 +143,34 @@ export default async function AboutPage() {
 
       {/* Timeline */}
       <section>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Our Journey</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Our Journey</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
               Key milestones in our development as a technology leader in event photography.
             </p>
           </div>
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border"></div>
-            <div className="space-y-12">
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border hidden md:block"></div>
+            <div className="space-y-12 md:space-y-12">
               {timeline.map((item, index) => {
                 const isLastItem = index === timeline.length - 1;
                 return (
                   <div
                     key={index}
                     className={`relative flex items-center ${
-                      isLastItem ? "justify-center" : (index % 2 === 0 ? "justify-start" : "justify-end")
+                      isLastItem ? "justify-center" : (index % 2 === 0 ? "justify-start md:justify-start" : "justify-end md:justify-end")
                     }`}
                   >
-                    <div className={`${isLastItem ? "w-full max-w-2xl text-center" : "w-5/12"} ${isLastItem ? "" : (index % 2 === 0 ? "text-right pr-8" : "text-left pl-8")}`}>
-                      <div className="bg-card rounded-2xl p-6 shadow-lg">
+                    <div className={`${isLastItem ? "w-full max-w-2xl text-center" : "w-full md:w-5/12"} ${isLastItem ? "" : (index % 2 === 0 ? "text-right md:text-right pr-0 md:pr-8" : "text-left md:text-left pl-0 md:pl-8")}`}>
+                      <div className="bg-card rounded-2xl p-4 md:p-6 shadow-lg">
                         <div className="text-sm font-semibold text-primary mb-2">{item.year}</div>
                         <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                         <p className="text-sm text-muted-foreground">{item.description}</p>
                       </div>
                     </div>
                     {!isLastItem && (
-                      <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background hidden md:block"></div>
                     )}
                   </div>
                 );
@@ -182,57 +182,57 @@ export default async function AboutPage() {
 
       {/* Meet the Founders */}
       <section className="bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Meet the Founders</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Meet the Founders</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
               The three passionate innovators who combine software, hardware, and creative expertise to transform ideas into reality.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8">
+            <div className="text-center space-y-4 md:space-y-6">
               <FounderPhoto
                 src="/images/founders/khanh-tran.jpg"
                 alt="Khanh Tran"
                 fallback="KT"
               />
-              <h3 className="text-2xl font-semibold">Khanh Tran (Mo)</h3>
+              <h3 className="text-xl md:text-2xl font-semibold">Khanh Tran (Mo)</h3>
               <p className="text-muted-foreground">
                 Software Lead
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed px-4 md:px-0">
                 Software-focused engineer with expertise in developing robust applications 
                 and innovative algorithms. Translates complex challenges into elegant 
                 technical solutions that power our creative visions.
               </p>
             </div>
-            <div className="text-center space-y-6">
+            <div className="text-center space-y-4 md:space-y-6">
               <FounderPhoto
                 src="/images/founders/nam-dao.jpg"
                 alt="Nam Dao"
                 fallback="ND"
               />
-              <h3 className="text-2xl font-semibold">Nam Dao</h3>
+              <h3 className="text-xl md:text-2xl font-semibold">Nam Dao</h3>
               <p className="text-muted-foreground">
                 Hardware Lead
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed px-4 md:px-0">
                 Hardware specialist who bridges the physical and digital worlds. 
                 Designs and builds custom systems that bring software concepts to life 
                 through innovative engineering and practical solutions.
               </p>
             </div>
-            <div className="text-center space-y-6">
+            <div className="text-center space-y-4 md:space-y-6">
               <FounderPhoto
                 src="/images/founders/minh-tran.jpg"
                 alt="Minh Tran"
                 fallback="MT"
               />
-              <h3 className="text-2xl font-semibold">Minh Tran</h3>
+              <h3 className="text-xl md:text-2xl font-semibold">Minh Tran</h3>
               <p className="text-muted-foreground">
                 Creative Lead
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed px-4 md:px-0">
                 Creative visionary who brings artistic perspective to technology innovation. 
                 Ensures our solutions are not just functional but beautiful, intuitive, 
                 and focused on human-centered design experiences.
