@@ -8,7 +8,6 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
       type: 'upload',
       prefix: 'blog/posts/',
       resource_type: 'raw',
-      format: 'json',
     });
 
     const posts: BlogPost[] = [];
@@ -16,7 +15,9 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     for (const resource of result.resources) {
       try {
         const content = await getContent(resource.public_id);
-        posts.push(content as BlogPost);
+        if (content && typeof content === 'object' && 'slug' in content) {
+          posts.push(content as BlogPost);
+        }
       } catch (error) {
         console.error(`Failed to load blog post ${resource.public_id}:`, error);
         // Continue loading other posts even if one fails
@@ -36,15 +37,16 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       type: 'upload',
       prefix: 'blog/posts/',
       resource_type: 'raw',
-      format: 'json',
     });
 
     for (const resource of result.resources) {
       try {
         const content = await getContent(resource.public_id);
-        const post = content as BlogPost;
-        if (post.slug === slug) {
-          return post;
+        if (content && typeof content === 'object' && 'slug' in content) {
+          const post = content as BlogPost;
+          if (post.slug === slug) {
+            return post;
+          }
         }
       } catch (error) {
         console.error(`Failed to load blog post ${resource.public_id}:`, error);

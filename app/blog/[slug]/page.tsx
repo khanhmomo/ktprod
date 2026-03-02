@@ -19,7 +19,10 @@ export async function generateStaticParams() {
     const { getAllBlogPosts } = await import("@/lib/database");
     const posts = await getAllBlogPosts();
     
-    return posts.map((post: any) => ({
+    // Filter out posts without valid slugs
+    const validPosts = posts.filter((post: any) => post && post.slug && typeof post.slug === 'string');
+    
+    return validPosts.map((post: any) => ({
       slug: post.slug,
     }));
   } catch (error) {
