@@ -45,119 +45,123 @@ export function Header() {
   const shouldUseRedAccent = !isHomepage;
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-sm border-b shadow-sm" 
-          : isHomepage 
-            ? "bg-transparent" 
-            : "bg-background/95 backdrop-blur-sm border-b border-primary/20 shadow-sm"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-2xl bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">KT</span>
+    <>
+      <header
+        className={cn(
+          "sticky top-0 z-50 w-full transition-all duration-300",
+          isScrolled 
+            ? "bg-background/95 backdrop-blur-sm border-b shadow-sm" 
+            : isHomepage 
+              ? "bg-transparent" 
+              : "bg-background/95 backdrop-blur-sm border-b border-primary/20 shadow-sm"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="h-8 w-8 rounded-2xl bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">KT</span>
+              </div>
+              <span className={cn(
+                "font-semibold text-lg",
+                shouldUseWhiteText ? "text-white" : "text-foreground"
+              )}>KTProd Technology</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link 
+                href="/tech" 
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  shouldUseWhiteText 
+                    ? "text-white hover:text-white/80" 
+                    : shouldUseRedAccent 
+                      ? "text-primary hover:text-primary/80" 
+                      : "text-foreground hover:text-primary"
+                )}
+              >
+                Technology
+              </Link>
+              <Link 
+                href="/about" 
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  shouldUseWhiteText 
+                    ? "text-white hover:text-white/80" 
+                    : shouldUseRedAccent 
+                      ? "text-primary hover:text-primary/80" 
+                      : "text-foreground hover:text-primary"
+                )}
+              >
+                About
+              </Link>
+              <Link 
+                href="/blog" 
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  shouldUseWhiteText 
+                    ? "text-white hover:text-white/80" 
+                    : shouldUseRedAccent 
+                      ? "text-primary hover:text-primary/80" 
+                      : "text-foreground hover:text-primary"
+                )}
+              >
+                Blog
+              </Link>
+              <Link 
+                href="/contact" 
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  shouldUseWhiteText 
+                    ? "text-white hover:text-white/80" 
+                    : shouldUseRedAccent 
+                      ? "text-primary hover:text-primary/80" 
+                      : "text-foreground hover:text-primary"
+                )}
+              >
+                Contact
+              </Link>
+            </nav>
+
+            {/* Right side */}
+            <div className="flex items-center space-x-4">
+              <div className={cn(
+                "transition-colors",
+                shouldUseWhiteText ? "text-white" : "text-foreground"
+              )}>
+                <ThemeToggle />
+              </div>
+
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className={cn(
+                  "md:hidden p-2 rounded-md transition-colors",
+                  shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
+                )}
+              >
+                {isMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </button>
             </div>
-            <span className={cn(
-              "font-semibold text-lg",
-              shouldUseWhiteText ? "text-white" : "text-foreground"
-            )}>KTProd Technology</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              href="/tech" 
-              className={cn(
-                "text-sm font-medium transition-colors",
-                shouldUseWhiteText 
-                  ? "text-white hover:text-white/80" 
-                  : shouldUseRedAccent 
-                    ? "text-primary hover:text-primary/80" 
-                    : "text-foreground hover:text-primary"
-              )}
-            >
-              Technology
-            </Link>
-            <Link 
-              href="/about" 
-              className={cn(
-                "text-sm font-medium transition-colors",
-                shouldUseWhiteText 
-                  ? "text-white hover:text-white/80" 
-                  : shouldUseRedAccent 
-                    ? "text-primary hover:text-primary/80" 
-                    : "text-foreground hover:text-primary"
-              )}
-            >
-              About
-            </Link>
-            <Link 
-              href="/blog" 
-              className={cn(
-                "text-sm font-medium transition-colors",
-                shouldUseWhiteText 
-                  ? "text-white hover:text-white/80" 
-                  : shouldUseRedAccent 
-                    ? "text-primary hover:text-primary/80" 
-                    : "text-foreground hover:text-primary"
-              )}
-            >
-              Blog
-            </Link>
-            <Link 
-              href="/contact" 
-              className={cn(
-                "text-sm font-medium transition-colors",
-                shouldUseWhiteText 
-                  ? "text-white hover:text-white/80" 
-                  : shouldUseRedAccent 
-                    ? "text-primary hover:text-primary/80" 
-                    : "text-foreground hover:text-primary"
-              )}
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Right side */}
-          <div className="flex items-center space-x-4">
-            <div className={cn(
-              "transition-colors",
-              shouldUseWhiteText ? "text-white" : "text-foreground"
-            )}>
-              <ThemeToggle />
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={cn(
-                "md:hidden p-2 rounded-md transition-colors",
-                shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
-              )}
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
           </div>
         </div>
-
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className={cn(
-            "md:hidden py-4 border-t backdrop-blur-sm",
-            shouldUseWhiteText 
-              ? "bg-black/80 border-white/20" 
-              : "bg-background border-border"
-          )}>
+      </header>
+      
+      {/* Mobile menu - outside header container */}
+      {isMenuOpen && (
+        <div className={cn(
+          "md:hidden py-4 border-t backdrop-blur-sm",
+          shouldUseWhiteText 
+            ? "bg-black/80 border-white/20" 
+            : "bg-background border-border"
+        )}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex flex-col space-y-2">
               <Link
                 href="/tech"
@@ -209,8 +213,8 @@ export function Header() {
               </Link>
             </nav>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+      )}
+    </>
   );
 }
