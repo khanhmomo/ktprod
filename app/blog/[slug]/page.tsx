@@ -14,44 +14,54 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  // Use the API route to get all blog posts
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`);
-  
-  if (!response.ok) {
+  try {
+    // Import the database function directly to avoid API calls during build
+    const { getAllBlogPosts } = await import("@/lib/blog-db-persistent");
+    const posts = await getAllBlogPosts();
+    
+    return posts.map((post: any) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Failed to generate static params:', error);
     return [];
   }
-  
-  const posts = await response.json();
-  return posts.map((post: any) => ({
-    slug: post.slug,
-  }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   // Await params in Next.js 16
   const { slug } = await params;
   
-  // Use the API route to get the blog post
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog/slug/${slug}`);
-  
-  if (!response.ok) {
-    return {
-      title: "Post Not Found",
-    };
-  }
-  
-  const post = await response.json();
-  
-  if (!post || post.error) {
-    return {
-      title: "Post Not Found",
-    };
-  }
+  try {
+    // Import the database function directly to avoid API calls during build
+    const { getBlogPostBySlug } = await import("@/lib/blog-db-persistent");
+    const post = await getBlogPostBySlug(slug);
+    
+    if (!post) {
+      return {
+        title: "Post Not Found",
+        description: "The requested blog post could not be found.",
+      };
+    }
 
-  return {
-    title: post.title,
-    description: post.description,
-  };
+    return {
+      title: post.title,
+      description: post.description,
+      openGraph: {
+        title: post.title,
+        description: post.description,
+        type: "article",
+        publishedTime: post.publishedAt || post.createdAt,
+        authors: [post.author],
+      },
+    };
+  } catch (error) {
+    console.error('Failed to generate metadata:', error);
+    return {
+      title: "Blog Post",
+      description: "A blog post from KTProd Platform",
+    };
+  }
 }
 
 // Force dynamic rendering
