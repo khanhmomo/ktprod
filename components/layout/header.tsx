@@ -40,8 +40,8 @@ export function Header() {
     };
   }, []);
 
-  // Only apply transparent/white text logic on homepage
-  const shouldUseTransparentStyle = isHomepage && isAtTop && isDarkMode;
+  // Only apply transparent style on homepage (but keep black text)
+  const shouldUseTransparentStyle = isHomepage && isAtTop;
 
   return (
     <header
@@ -63,7 +63,7 @@ export function Header() {
             </div>
             <span className={cn(
               "font-semibold text-lg",
-              shouldUseTransparentStyle ? "text-white" : "text-foreground"
+              "text-foreground"
             )}>KTProd Technology</span>
           </Link>
 
@@ -73,7 +73,7 @@ export function Header() {
               href="/tech" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-foreground hover:text-primary"
               )}
             >
               Technology
@@ -82,7 +82,7 @@ export function Header() {
               href="/about" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-foreground hover:text-primary"
               )}
             >
               About
@@ -91,7 +91,7 @@ export function Header() {
               href="/blog" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-foreground hover:text-primary"
               )}
             >
               Blog
@@ -100,7 +100,7 @@ export function Header() {
               href="/contact" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                "text-foreground hover:text-primary"
               )}
             >
               Contact
@@ -111,7 +111,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <div className={cn(
               "transition-colors",
-              shouldUseTransparentStyle ? "text-white" : "text-foreground"
+              "text-foreground"
             )}>
               <ThemeToggle />
             </div>
@@ -121,7 +121,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
                 "md:hidden p-2 rounded-md transition-colors",
-                shouldUseTransparentStyle ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
+                "text-foreground hover:bg-muted"
               )}
             >
               {isMenuOpen ? (
