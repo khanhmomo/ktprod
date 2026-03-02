@@ -56,6 +56,11 @@ export default async function AboutPage() {
       title: "Bringing Ideas to Life",
       description: "Dedicated to transforming every bright idea into reality, with passion for innovation that benefits all people.",
     },
+    {
+      year: "What's Next?",
+      title: "Still Innovating",
+      description: "Our journey continues as we push boundaries, explore new possibilities, and keep bringing creative ideas to life with technology that makes a difference.",
+    },
   ];
 
   return (
