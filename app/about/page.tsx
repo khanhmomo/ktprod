@@ -7,9 +7,9 @@ export default async function AboutPage() {
   const pageContent = await getPageContent('about');
   const content = pageContent || {
     pageTitle: "About KTProd Technology",
-    pageDescription: "Pioneering research and development for every bright idea. We combine software innovation with hardware engineering to create comprehensive solutions for any concept that pushes technological boundaries.",
-    companyStory: "Founded with a vision to transform creative ideas into technological reality, KTProd Technology has been at the forefront of innovation in event and sport photography automation. Our team of expert engineers and developers work tirelessly to push the boundaries of what's possible.",
-    missionStatement: "To empower businesses and individuals with cutting-edge technology solutions that transform their creative visions into reality.",
+    pageDescription: "Two college students with a passion for innovation, transforming photography challenges into technological solutions that benefit everyone.",
+    companyStory: "We began as two college students who loved to change the world around us. Starting as sports photographers, we discovered that technology could bring tremendous benefits to everyone—not just photographers and racers, but to all people. With passion and a love for innovation, we dedicate ourselves to bringing every bright idea to life, transforming creative concepts into practical technological solutions that make a real difference.",
+    missionStatement: "To empower people with innovative technology that transforms creative challenges into opportunities, making advanced solutions accessible to everyone.",
   };
 
   const values = [
@@ -21,40 +21,40 @@ export default async function AboutPage() {
     {
       icon: Lightbulb,
       title: "Vision",
-      description: "To become the global leader in photography technology, enabling seamless capture and delivery of high-quality event imagery.",
+      description: "To create technology that bridges the gap between creative passion and practical innovation, making advanced tools accessible to everyone.",
     },
     {
       icon: Users,
       title: "Focus",
-      description: "Specializing in event and sport photography with expertise in both software development and hardware engineering.",
+      description: "Starting from sports photography, we focus on solving real-world challenges through technology that benefits all people.",
     },
     {
       icon: Award,
-      title: "Excellence",
-      description: "Committed to technological innovation, quality engineering, and solving real-world photography challenges.",
+      title: "Passion",
+      description: "Driven by our love for innovation and the desire to bring every bright idea to life, no matter how ambitious.",
     },
   ];
 
   const timeline = [
     {
-      year: "Foundation",
-      title: "KTProd Technology Established",
-      description: "Founded with a clear mission to revolutionize event photography through technology.",
+      year: "College Days",
+      title: "Two Sports Photographers",
+      description: "We began as college students with cameras, capturing sports events and discovering the challenges photographers face daily.",
     },
     {
-      year: "R&D Phase",
-      title: "Research & Development Begins",
-      description: "Initial development of smart camera systems and cloud-based workflow solutions.",
+      year: "The Spark",
+      title: "Technology Meets Photography",
+      description: "Realized that technology could solve many photography challenges, not just for photographers but for everyone involved in events.",
     },
     {
-      year: "Innovation",
-      title: "AI Integration",
-      description: "Integration of machine learning algorithms for automated event coverage and shot selection.",
+      year: "Innovation Journey",
+      title: "Building Solutions",
+      description: "Started developing practical technology solutions, transforming our photography experience into innovative tools for broader applications.",
     },
     {
-      year: "Expansion",
-      title: "Hardware Solutions",
-      description: "Development of custom hardware systems for specialized sport photography requirements.",
+      year: "KTProd Today",
+      title: "Bringing Ideas to Life",
+      description: "Dedicated to transforming every bright idea into reality, with passion for innovation that benefits all people.",
     },
   ];
 
@@ -183,30 +183,30 @@ export default async function AboutPage() {
               <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
                 <Target className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">Event Photography</h3>
+              <h3 className="text-xl font-semibold">Sports Photography</h3>
               <p className="text-muted-foreground">
-                Comprehensive solutions for conferences, concerts, and large-scale events 
-                requiring high-volume image capture and rapid delivery.
+                Our roots in sports photography give us deep understanding of the challenges 
+                and opportunities in capturing fast-action moments.
               </p>
             </div>
             <div className="text-center space-y-4">
               <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
                 <Award className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">Sport Photography</h3>
+              <h3 className="text-xl font-semibold">Technology Innovation</h3>
               <p className="text-muted-foreground">
-                Specialized systems for capturing fast-action sports with precision timing 
-                and automated shot selection.
+                Transforming photography challenges into technological solutions that benefit 
+                not just photographers, but everyone involved in events.
               </p>
             </div>
             <div className="text-center space-y-4">
               <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
                 <Lightbulb className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">R&D Innovation</h3>
+              <h3 className="text-xl font-semibold">Creative Solutions</h3>
               <p className="text-muted-foreground">
-                Continuous research into emerging technologies and their applications 
-                in professional photography workflows.
+                Bringing every bright idea to life with passion and innovation, creating practical 
+                solutions that make a real difference in people's lives.
               </p>
             </div>
           </div>
