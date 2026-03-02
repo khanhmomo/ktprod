@@ -154,90 +154,95 @@ export function Header() {
       </header>
       
       {/* Mobile menu - full screen slide from right */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          
-          {/* Full screen menu panel */}
-          <div className={cn(
-            "absolute top-0 right-0 h-full w-full transform transition-transform duration-300 ease-in-out",
-            shouldUseWhiteText 
-              ? "bg-black/95" 
-              : "bg-background"
-          )}>
-            <div className="flex flex-col h-full justify-center">
-              {/* Close button */}
-              <div className="absolute top-4 right-4">
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className={cn(
-                    "p-3 rounded-md transition-colors",
-                    shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
-                  )}
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              
-              {/* Menu content - centered */}
-              <nav className="px-8 space-y-6">
-                <Link
-                  href="/tech"
-                  className={cn(
-                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
-                    shouldUseWhiteText 
-                      ? "text-white hover:bg-white/20" 
-                      : "text-foreground hover:bg-accent"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Technology
-                </Link>
-                <Link
-                  href="/about"
-                  className={cn(
-                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
-                    shouldUseWhiteText 
-                      ? "text-white hover:bg-white/20" 
-                      : "text-foreground hover:bg-accent"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/blog"
-                  className={cn(
-                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
-                    shouldUseWhiteText 
-                      ? "text-white hover:bg-white/20" 
-                      : "text-foreground hover:bg-accent"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/contact"
-                  className={cn(
-                    "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
-                    shouldUseWhiteText 
-                      ? "text-white hover:bg-white/20" 
-                      : "text-foreground hover:bg-accent"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Contact
-                </Link>
-              </nav>
+      <div className={cn(
+        "fixed inset-0 z-40 md:hidden transition-opacity duration-300",
+        isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      )}>
+        {/* Backdrop */}
+        <div 
+          className={cn(
+            "absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300",
+            isMenuOpen ? "opacity-100" : "opacity-0"
+          )}
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        {/* Full screen menu panel */}
+        <div className={cn(
+          "absolute top-0 right-0 h-full w-full transform transition-transform duration-300 ease-in-out",
+          shouldUseWhiteText 
+            ? "bg-black/95" 
+            : "bg-background",
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        )}>
+          <div className="flex flex-col h-full justify-center">
+            {/* Close button */}
+            <div className="absolute top-4 right-4">
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "p-3 rounded-md transition-colors",
+                  shouldUseWhiteText ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
+                )}
+              >
+                <X className="h-6 w-6" />
+              </button>
             </div>
+            
+            {/* Menu content - centered */}
+            <nav className="px-8 space-y-6">
+              <Link
+                href="/tech"
+                className={cn(
+                  "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Technology
+              </Link>
+              <Link
+                href="/about"
+                className={cn(
+                  "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/blog"
+                className={cn(
+                  "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/contact"
+                className={cn(
+                  "text-2xl font-medium transition-colors px-6 py-4 rounded-md block text-center",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
