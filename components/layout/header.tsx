@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,9 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
 
 export function Header() {
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -36,13 +40,18 @@ export function Header() {
     };
   }, []);
 
+  // Only apply transparent/white text logic on homepage
+  const shouldUseTransparentStyle = isHomepage && isAtTop && isDarkMode;
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled 
           ? "bg-background/95 backdrop-blur-sm border-b shadow-sm" 
-          : "bg-transparent"
+          : isHomepage 
+            ? "bg-transparent" 
+            : "bg-background/95 backdrop-blur-sm border-b"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +63,7 @@ export function Header() {
             </div>
             <span className={cn(
               "font-semibold text-lg",
-              isAtTop && isDarkMode ? "text-white" : "text-foreground"
+              shouldUseTransparentStyle ? "text-white" : "text-foreground"
             )}>KTProd Technology</span>
           </Link>
 
@@ -64,7 +73,7 @@ export function Header() {
               href="/tech" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                isAtTop && isDarkMode ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
               )}
             >
               Technology
@@ -73,7 +82,7 @@ export function Header() {
               href="/about" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                isAtTop && isDarkMode ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
               )}
             >
               About
@@ -82,7 +91,7 @@ export function Header() {
               href="/blog" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                isAtTop && isDarkMode ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
               )}
             >
               Blog
@@ -91,7 +100,7 @@ export function Header() {
               href="/contact" 
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                isAtTop && isDarkMode ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
+                shouldUseTransparentStyle ? "text-white hover:text-white/80" : "text-foreground hover:text-primary"
               )}
             >
               Contact
@@ -102,7 +111,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <div className={cn(
               "transition-colors",
-              isAtTop && isDarkMode ? "text-white" : "text-foreground"
+              shouldUseTransparentStyle ? "text-white" : "text-foreground"
             )}>
               <ThemeToggle />
             </div>
@@ -112,7 +121,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
                 "md:hidden p-2 rounded-md transition-colors",
-                isAtTop && isDarkMode ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
+                shouldUseTransparentStyle ? "text-white hover:bg-white/20" : "text-foreground hover:bg-muted"
               )}
             >
               {isMenuOpen ? (
