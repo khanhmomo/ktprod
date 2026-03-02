@@ -60,7 +60,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export async function createBlogPost(post: Omit<BlogPost, 'id' | 'slug' | 'createdAt' | 'updatedAt'>): Promise<BlogPost> {
+export async function createBlogPost(post: Omit<BlogPost, 'id' | 'slug' | 'createdAt' | 'updatedAt' | 'readingTime'>): Promise<BlogPost> {
   const id = Date.now().toString();
   const now = new Date();
   
@@ -70,10 +70,16 @@ export async function createBlogPost(post: Omit<BlogPost, 'id' | 'slug' | 'creat
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
   
+  // Calculate reading time (average 200 words per minute)
+  const wordsPerMinute = 200;
+  const wordCount = post.content.split(/\s+/).length;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  
   const newPost: BlogPost = {
     ...post,
     id,
     slug,
+    readingTime,
     createdAt: now,
     updatedAt: now,
   };
@@ -119,6 +125,13 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
 
     // Keep the existing slug even if title changes
     // This prevents breaking existing links
+    
+    // Recalculate reading time if content was updated
+    if (updates.content) {
+      const wordsPerMinute = 200;
+      const wordCount = updates.content.split(/\s+/).length;
+      updatedPost.readingTime = Math.ceil(wordCount / wordsPerMinute);
+    }
 
     // Update the content in Cloudinary using the same public_id
     await storeContent(updatedPost, 'blog/posts', resourcePublicId);
