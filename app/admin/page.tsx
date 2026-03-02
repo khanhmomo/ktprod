@@ -1,4 +1,4 @@
-import { getAllBlogPosts } from "@/lib/database-postgres";
+import { getAllBlogPosts } from "@/lib/database-firebase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Eye, Edit, Plus, Settings, Home, FileImage, Users, Mail } from "lucide-react";

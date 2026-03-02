@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getBlogPostById, updateBlogPost, deleteBlogPost } from '@/lib/database-postgres';
+import { getBlogPostById, updateBlogPost, deleteBlogPost } from '@/lib/database-firebase';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {

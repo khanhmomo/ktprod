@@ -1,4 +1,4 @@
-import { getAllBlogPosts } from "@/lib/database-postgres";
+import { getAllBlogPosts } from "@/lib/database-firebase";
 import { BlogCard } from "@/components/shared/blog-card";
 import Link from "next/link";
 
