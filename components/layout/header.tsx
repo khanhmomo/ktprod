@@ -41,7 +41,7 @@ export function Header() {
   }, []);
 
   // Apply white text on homepage when transparent, red accent on other pages
-  const shouldUseWhiteText = isHomepage && isAtTop;
+  const shouldUseWhiteText = isHomepage && isAtTop && !isMenuOpen;
   const shouldUseRedAccent = !isHomepage;
 
   return (
