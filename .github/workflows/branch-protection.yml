@@ -28,6 +28,3 @@ jobs:
       
     - name: Build project
       run: npm run build
-      
-    - name: Check for lint errors
-      run: npm run lint || echo "No lint script configured"
