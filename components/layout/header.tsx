@@ -152,32 +152,57 @@ export function Header() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t bg-background backdrop-blur-sm border-border">
+          <div className={cn(
+            "md:hidden py-4 border-t backdrop-blur-sm",
+            shouldUseWhiteText 
+              ? "bg-black/80 border-white/20" 
+              : "bg-background border-border"
+          )}>
             <nav className="flex flex-col space-y-2">
               <Link
                 href="/tech"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
+                className={cn(
+                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Technology
               </Link>
               <Link
                 href="/about"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
+                className={cn(
+                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
                 href="/blog"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
+                className={cn(
+                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
               </Link>
               <Link
                 href="/contact"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-4 py-3 rounded-md hover:bg-accent"
+                className={cn(
+                  "text-sm font-medium transition-colors px-4 py-3 rounded-md",
+                  shouldUseWhiteText 
+                    ? "text-white hover:bg-white/20" 
+                    : "text-foreground hover:bg-accent"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
