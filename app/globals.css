@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 25% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 10%;
+    --primary: 215 40% 15%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 215 25% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 215 25% 10%;
+    --accent: 0 70% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 35%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 25% 15%;
+    --input: 215 25% 15%;
+    --ring: 0 70% 45%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 215 25% 5%;
+    --foreground: 0 0% 95%;
+    --card: 215 25% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 215 25% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 25% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 215 25% 15%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 70% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 35%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 0 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins;
+  }
+}
+
+@layer utilities {
+  .text-accent-red {
+    color: hsl(0 70% 45%);
+  }
+  .bg-accent-red {
+    background-color: hsl(0 70% 45%);
+  }
+  .border-accent-red {
+    border-color: hsl(0 70% 45%);
+  }
+  
+  /* Dark mode prose styles */
+  .dark .prose {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose h1,
+  .dark .prose h2,
+  .dark .prose h3,
+  .dark .prose h4,
+  .dark .prose h5,
+  .dark .prose h6 {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose p {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose li {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose blockquote {
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .prose code {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--muted));
+  }
+  
+  .dark .prose pre {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--muted));
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .prose strong {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose em {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose a {
+    color: hsl(var(--primary));
+  }
+  
+  .dark .prose a:hover {
+    color: hsl(var(--primary) / 0.8);
+  }
+  
+  .dark .prose hr {
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .prose ul,
+  .dark .prose ol {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose table {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .prose th,
+  .dark .prose td {
+    border-color: hsl(var(--border));
+  }
+  
+  /* Rich text editor dark mode styles */
+  .dark .ProseMirror {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .ProseMirror p,
+  .dark .ProseMirror h1,
+  .dark .ProseMirror h2,
+  .dark .ProseMirror h3,
+  .dark .ProseMirror h4,
+  .dark .ProseMirror h5,
+  .dark .ProseMirror h6,
+  .dark .ProseMirror li,
+  .dark .ProseMirror ul,
+  .dark .ProseMirror ol,
+  .dark .ProseMirror blockquote,
+  .dark .ProseMirror strong,
+  .dark .ProseMirror em {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .ProseMirror a {
+    color: hsl(var(--primary));
+  }
+  
+  .dark .ProseMirror a:hover {
+    color: hsl(var(--primary) / 0.8);
+  }
+  
+  .dark .ProseMirror code {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--muted));
+  }
+  
+  .dark .ProseMirror pre {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--muted));
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .ProseMirror blockquote {
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .ProseMirror hr {
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .ProseMirror img {
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .ProseMirror table {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .ProseMirror th,
+  .dark .ProseMirror td {
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .ProseMirror-selectednode {
+    background-color: hsl(var(--primary) / 0.1);
+  }
+  
+  /* Rich text editor scrollbar styling */
+  .prose::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .prose::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+  
+  .prose::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  
+  .prose::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  
+  .dark .prose::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  .dark .prose::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+  }
+  
+  .dark .prose::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  
+  /* Ensure toolbar stays above content */
+  .sticky-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  /* Multiple image support */
+  .image-wrapper {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: block;
+  }
+  
+  .ProseMirror .image-wrapper {
+    margin: 1rem 0;
+  }
+  
+  .ProseMirror .image-wrapper img {
+    margin: 0;
+  }
+  
+  .editor-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: block;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+}
