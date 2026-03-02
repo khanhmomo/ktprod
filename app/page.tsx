@@ -3,8 +3,14 @@ import { ArrowRight, Cpu, Camera, Zap, Cloud, Brain, Settings } from "lucide-rea
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAllBlogPosts } from "@/lib/database-appwrite";
+import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch latest blog posts
+  const blogPosts = await getAllBlogPosts();
+  const latestPosts = blogPosts.slice(0, 3); // Get only the latest 3 posts
+
   const techFocus = [
     {
       icon: Camera,
@@ -251,42 +257,84 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
-                <CardTitle className="text-lg">Advancing AI in Sport Photography</CardTitle>
-                <CardDescription>
-                  Exploring the latest developments in machine learning for automated sports coverage.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Coming soon...</p>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
-                <CardTitle className="text-lg">Hardware Innovations for Events</CardTitle>
-                <CardDescription>
-                  Our latest custom camera systems designed for high-volume event photography.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Coming soon...</p>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
-                <CardTitle className="text-lg">Cloud Architecture at Scale</CardTitle>
-                <CardDescription>
-                  Building infrastructure to handle millions of photos from major sporting events.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Coming soon...</p>
-              </CardContent>
-            </Card>
+            {latestPosts.length > 0 ? (
+              latestPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                      <div className="relative aspect-video bg-muted rounded-2xl mb-4 overflow-hidden">
+                        {(post.coverImage || post.featuredImage) ? (
+                          <Image
+                            src={post.coverImage || post.featuredImage || ''}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-muted flex items-center justify-center">
+                            <span className="text-muted-foreground">No image</span>
+                          </div>
+                        )}
+                      </div>
+                      <CardTitle className="text-lg line-clamp-2">{post.title}</CardTitle>
+                      <CardDescription className="line-clamp-3">
+                        {post.excerpt || post.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : new Date(post.createdAt).toLocaleDateString()}</span>
+                        {post.category && (
+                          <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                            {post.category}
+                          </span>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))
+            ) : (
+              // Fallback to placeholder posts when no blog posts exist
+              <>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
+                    <CardTitle className="text-lg">Advancing AI in Sport Photography</CardTitle>
+                    <CardDescription>
+                      Exploring the latest developments in machine learning for automated sports coverage.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">Coming soon...</p>
+                  </CardContent>
+                </Card>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
+                    <CardTitle className="text-lg">Hardware Innovations for Events</CardTitle>
+                    <CardDescription>
+                      Our latest custom camera systems designed for high-volume event photography.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">Coming soon...</p>
+                  </CardContent>
+                </Card>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="aspect-video bg-muted rounded-2xl mb-4"></div>
+                    <CardTitle className="text-lg">Cloud Architecture at Scale</CardTitle>
+                    <CardDescription>
+                      Building infrastructure to handle millions of photos from major sporting events.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">Coming soon...</p>
+                  </CardContent>
+                </Card>
+              </>
+            )}
           </div>
         </div>
       </section>
