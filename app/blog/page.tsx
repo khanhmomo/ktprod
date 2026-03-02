@@ -7,10 +7,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BlogPost } from "@/types/blog";
 
-// Force dynamic rendering and disable caching
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 const categories = ['All', 'General', 'Tech News', 'R&D'] as const;
 
 export default function BlogPage() {
