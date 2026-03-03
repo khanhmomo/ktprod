@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -16,7 +16,6 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,18 +24,10 @@ export function Header() {
       setIsAtTop(window.scrollY < window.innerHeight * 0.8); // Still in hero section
     };
 
-    // Check dark mode
-    const checkDarkMode = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    };
-
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("storage", checkDarkMode);
-    checkDarkMode(); // Initial check
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("storage", checkDarkMode);
     };
   }, []);
 

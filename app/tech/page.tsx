@@ -1,4 +1,4 @@
-import { Camera, Brain, Cloud, Settings, Zap, Cpu, Shield, Database, Code, Package, Network, Server } from "lucide-react";
+import { Camera, Brain, Cloud, Settings, Database, Shield, Server, Code } from "lucide-react";
 import { getPageContent } from "@/lib/database-appwrite";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
