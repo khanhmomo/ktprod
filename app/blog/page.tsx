@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { BlogCard } from "@/components/shared/blog-card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { BlogPost } from "@/types/blog";
 
 const categories = ['All', 'General', 'Tech News', 'R&D', 'Creative'] as const;

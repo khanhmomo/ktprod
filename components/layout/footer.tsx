@@ -47,9 +47,9 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-sm mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>ktprod.com</li>
-              <li>Technology R&D</li>
-              <li>Event & Sport Photography</li>
+              <li>khanhtranproduction@gmail.com</li>
+              <li>+1 (361) 218-1470</li>
+              <li>Houston, Texas 77072</li>
             </ul>
           </div>
         </div>

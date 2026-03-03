@@ -1,7 +1,7 @@
 import { getAllBlogPosts } from "@/lib/database-appwrite";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Eye, Edit, Plus, Settings, Home, FileImage, Users, Mail } from "lucide-react";
+import { Calendar, Users, FileText, Settings, LogOut, Eye, Edit, Home, Mail, Plus } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminDashboard() {

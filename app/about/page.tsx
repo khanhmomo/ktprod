@@ -2,14 +2,15 @@ import { Target, Lightbulb, Users, Award, ArrowRight } from "lucide-react";
 import { getPageContent } from "@/lib/database-appwrite";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FounderPhoto } from "@/components/shared/founder-photo";
 
 export default async function AboutPage() {
   const pageContent = await getPageContent('about');
   const content = pageContent || {
     pageTitle: "About KTProd Technology",
-    pageDescription: "Pioneering research and development for every bright idea. We combine software innovation with hardware engineering to create comprehensive solutions for any concept that pushes technological boundaries.",
-    companyStory: "Founded with a vision to transform creative ideas into technological reality, KTProd Technology has been at the forefront of innovation in event and sport photography automation. Our team of expert engineers and developers work tirelessly to push the boundaries of what's possible.",
-    missionStatement: "To empower businesses and individuals with cutting-edge technology solutions that transform their creative visions into reality.",
+    pageDescription: "An R&D team dedicated to innovation, transforming bright ideas into technological solutions that benefit everyone.",
+    companyStory: "We are a passionate R&D team that loves bringing innovative ideas to life. Our focus is on bridging the gap between creative concepts and practical technology solutions. We combine expertise in software engineering, hardware design, and creative applications to solve complex challenges and transform bright ideas into real-world solutions that make a meaningful impact across various domains and industries.",
+    missionStatement: "To empower innovation by transforming creative challenges into technological opportunities, making advanced solutions accessible to everyone.",
   };
 
   const values = [
@@ -21,40 +22,45 @@ export default async function AboutPage() {
     {
       icon: Lightbulb,
       title: "Vision",
-      description: "To become the global leader in photography technology, enabling seamless capture and delivery of high-quality event imagery.",
+      description: "To create technology that bridges the gap between creative passion and practical innovation, making advanced tools accessible to everyone.",
     },
     {
       icon: Users,
       title: "Focus",
-      description: "Specializing in event and sport photography with expertise in both software development and hardware engineering.",
+      description: "Starting from sports photography, we focus on solving real-world challenges through technology that benefits all people.",
     },
     {
       icon: Award,
-      title: "Excellence",
-      description: "Committed to technological innovation, quality engineering, and solving real-world photography challenges.",
+      title: "Passion",
+      description: "Driven by our love for innovation and the desire to bring every bright idea to life, no matter how ambitious.",
     },
   ];
 
   const timeline = [
     {
-      year: "Foundation",
-      title: "KTProd Technology Established",
-      description: "Founded with a clear mission to revolutionize event photography through technology.",
+      year: "College Days",
+      title: "Two Sports Photographers",
+      description: "We began as college students with cameras, capturing sports events and discovering the challenges photographers face daily.",
     },
     {
-      year: "R&D Phase",
-      title: "Research & Development Begins",
-      description: "Initial development of smart camera systems and cloud-based workflow solutions.",
+      year: "The Spark",
+      title: "Technology Meets Photography",
+      description: "Realized that technology could solve many photography challenges, not just for photographers but for everyone involved in events.",
     },
     {
-      year: "Innovation",
-      title: "AI Integration",
-      description: "Integration of machine learning algorithms for automated event coverage and shot selection.",
+      year: "Innovation Journey",
+      title: "Building Solutions",
+      description: "Started developing practical technology solutions, transforming our photography experience into innovative tools for broader applications.",
     },
     {
-      year: "Expansion",
-      title: "Hardware Solutions",
-      description: "Development of custom hardware systems for specialized sport photography requirements.",
+      year: "KTProd Today",
+      title: "Bringing Ideas to Life",
+      description: "Dedicated to transforming every bright idea into reality, with passion for innovation that benefits all people.",
+    },
+    {
+      year: "What's Next?",
+      title: "Innovation Continues",
+      description: "Our journey continues as we push boundaries, explore new possibilities, and keep bringing creative ideas to life with technology that makes a difference.",
     },
   ];
 
@@ -76,14 +82,14 @@ export default async function AboutPage() {
 
       {/* Company Values */}
       <section>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Our Core Values</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Our Core Values</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
               The principles that guide our research, development, and company culture.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {values.map((value, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -105,27 +111,27 @@ export default async function AboutPage() {
 
       {/* Company Story */}
       <section className="bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Our Story</h2>
-              <p className="text-lg text-muted-foreground whitespace-pre-line">
+              <h2 className="text-2xl md:text-3xl font-bold">Our Story</h2>
+              <p className="text-lg text-muted-foreground whitespace-pre-line px-4 md:px-0">
                 {content.companyStory}
               </p>
             </div>
-            <div className="bg-card rounded-2xl p-8 shadow-lg">
+            <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg">
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">Innovation</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">Innovation</div>
                   <div className="text-sm text-muted-foreground">At the core of everything we do</div>
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">Software</div>
+                    <div className="text-xl md:text-2xl font-bold text-primary">Software</div>
                     <div className="text-sm text-muted-foreground">Advanced algorithms</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">Hardware</div>
+                    <div className="text-xl md:text-2xl font-bold text-primary">Hardware</div>
                     <div className="text-sm text-muted-foreground">Custom solutions</div>
                   </div>
                 </div>
@@ -137,76 +143,99 @@ export default async function AboutPage() {
 
       {/* Timeline */}
       <section>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Our Journey</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Our Journey</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
               Key milestones in our development as a technology leader in event photography.
             </p>
           </div>
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border"></div>
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? "justify-start" : "justify-end"
-                  }`}
-                >
-                  <div className={`w-5/12 ${index % 2 === 0 ? "text-right pr-8" : "text-left pl-8"}`}>
-                    <div className="bg-card rounded-2xl p-6 shadow-lg">
-                      <div className="text-sm font-semibold text-primary mb-2">{item.year}</div>
-                      <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border hidden md:block"></div>
+            <div className="space-y-12 md:space-y-12">
+              {timeline.map((item, index) => {
+                const isLastItem = index === timeline.length - 1;
+                return (
+                  <div
+                    key={index}
+                    className={`relative flex items-center ${
+                      isLastItem ? "justify-center" : (index % 2 === 0 ? "justify-start md:justify-start" : "justify-end md:justify-end")
+                    }`}
+                  >
+                    <div className={`${isLastItem ? "w-full max-w-2xl text-center" : "w-full md:w-5/12"} ${isLastItem ? "" : (index % 2 === 0 ? "text-right md:text-right pr-0 md:pr-8" : "text-left md:text-left pl-0 md:pl-8")}`}>
+                      <div className="bg-card rounded-2xl p-4 md:p-6 shadow-lg">
+                        <div className="text-sm font-semibold text-primary mb-2">{item.year}</div>
+                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                      </div>
                     </div>
+                    {!isLastItem && (
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background hidden md:block"></div>
+                    )}
                   </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Expertise Areas */}
+      {/* Meet the Founders */}
       <section className="bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-bold">Areas of Expertise</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our specialized knowledge and capabilities in event and sport photography technology.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="text-center space-y-4 mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold">Meet the Founders</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4 md:px-0">
+              The three passionate innovators who combine software, hardware, and creative expertise to transform ideas into reality.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Target className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">Event Photography</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8">
+            <div className="text-center space-y-4 md:space-y-6">
+              <FounderPhoto
+                src="/images/founders/khanh-tran.jpg"
+                alt="Khanh Tran"
+                fallback="KT"
+              />
+              <h3 className="text-xl md:text-2xl font-semibold">Khanh Tran (Mo)</h3>
               <p className="text-muted-foreground">
-                Comprehensive solutions for conferences, concerts, and large-scale events 
-                requiring high-volume image capture and rapid delivery.
+                Software Lead
+              </p>
+              <p className="text-sm leading-relaxed px-4 md:px-0">
+                Software-focused engineer with expertise in developing robust applications 
+                and innovative algorithms. Translates complex challenges into elegant 
+                technical solutions that power our creative visions.
               </p>
             </div>
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Award className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">Sport Photography</h3>
+            <div className="text-center space-y-4 md:space-y-6">
+              <FounderPhoto
+                src="/images/founders/nam-dao.jpg"
+                alt="Nam Dao"
+                fallback="ND"
+              />
+              <h3 className="text-xl md:text-2xl font-semibold">Nam Dao</h3>
               <p className="text-muted-foreground">
-                Specialized systems for capturing fast-action sports with precision timing 
-                and automated shot selection.
+                Hardware Lead
+              </p>
+              <p className="text-sm leading-relaxed px-4 md:px-0">
+                Hardware specialist who bridges the physical and digital worlds. 
+                Designs and builds custom systems that bring software concepts to life 
+                through innovative engineering and practical solutions.
               </p>
             </div>
-            <div className="text-center space-y-4">
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                <Lightbulb className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold">R&D Innovation</h3>
+            <div className="text-center space-y-4 md:space-y-6">
+              <FounderPhoto
+                src="/images/founders/minh-tran.jpg"
+                alt="Minh Tran"
+                fallback="MT"
+              />
+              <h3 className="text-xl md:text-2xl font-semibold">Minh Tran</h3>
               <p className="text-muted-foreground">
-                Continuous research into emerging technologies and their applications 
-                in professional photography workflows.
+                Creative Lead
+              </p>
+              <p className="text-sm leading-relaxed px-4 md:px-0">
+                Creative visionary who brings artistic perspective to technology innovation. 
+                Ensures our solutions are not just functional but beautiful, intuitive, 
+                and focused on human-centered design experiences.
               </p>
             </div>
           </div>
