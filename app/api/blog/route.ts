@@ -107,29 +107,52 @@ export async function PUT(request: NextRequest) {
 
     console.log('Updating blog post:', id, JSON.stringify(data, null, 2));
     
+    // Validate category if it's being updated
+    if (data.category) {
+      const validCategories = ['General', 'Tech News', 'R&D', 'Creative'];
+      if (!validCategories.includes(data.category)) {
+        return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
+      }
+    }
+    
+    // Filter out invalid fields that aren't part of BlogPost interface
+    const validFields = [
+      'title', 'description', 'excerpt', 'content', 'coverImage', 'featuredImage',
+      'videoUrl', 'author', 'category', 'published', 'publishedAt'
+    ];
+    
+    const filteredData: any = {};
+    for (const field of validFields) {
+      if (data.hasOwnProperty(field)) {
+        filteredData[field] = data[field];
+      }
+    }
+    
+    console.log('Filtered data:', JSON.stringify(filteredData, null, 2));
+    
     // Process images in content if content is being updated
-    if (data.content) {
+    if (filteredData.content) {
       console.log('Processing images in updated content...');
-      const processedContent = await processImagesInContent(data.content);
-      data.content = processedContent;
+      const processedContent = await processImagesInContent(filteredData.content);
+      filteredData.content = processedContent;
     }
     
     // Process cover image if it's being updated
-    if (data.coverImage && data.coverImage.startsWith('data:image')) {
+    if (filteredData.coverImage && filteredData.coverImage.startsWith('data:image')) {
       console.log('Uploading new cover image to storage...');
-      const coverImageUrl = await uploadCoverImage(data.coverImage);
-      data.coverImage = coverImageUrl;
+      const coverImageUrl = await uploadCoverImage(filteredData.coverImage);
+      filteredData.coverImage = coverImageUrl;
     }
     
     // Process featured image if it's being updated
-    if (data.featuredImage && data.featuredImage.startsWith('data:image')) {
+    if (filteredData.featuredImage && filteredData.featuredImage.startsWith('data:image')) {
       console.log('Uploading new featured image to storage...');
-      const featuredImageUrl = await uploadCoverImage(data.featuredImage);
-      data.featuredImage = featuredImageUrl;
+      const featuredImageUrl = await uploadCoverImage(filteredData.featuredImage);
+      filteredData.featuredImage = featuredImageUrl;
     }
     
     // Update the post
-    const updatedPost = await updateBlogPost(id, data);
+    const updatedPost = await updateBlogPost(id, filteredData);
     
     if (updatedPost) {
       return NextResponse.json(updatedPost);
