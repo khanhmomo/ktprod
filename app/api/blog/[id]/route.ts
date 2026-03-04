@@ -45,7 +45,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const changedFields: any = {};
     
     // Fields that should never be sent by client (system-managed)
-    const systemFields = ['id', 'slug', 'createdAt', 'updatedAt', 'readingTime'];
+    const systemFields = ['id', 'slug', 'createdAt', 'updatedAt', 'readingTime', 'imageMarkers'];
     
     // Only include fields that are different and not system-managed
     for (const [key, newValue] of Object.entries(data)) {
