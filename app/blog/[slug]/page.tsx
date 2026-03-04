@@ -140,6 +140,24 @@ const reconstructContentWithImages = (baseContent: string, markers: ImageMarker[
   return reconstructedContent;
 };
 
+// Clean up problematic HTML from certain sources
+const cleanContent = (content: string) => {
+  return content
+    // Remove article tags with problematic classes
+    .replace(/<article[^>]*>/g, '<div>')
+    .replace(/<\/article>/g, '</div>')
+    // Remove data attributes and problematic classes
+    .replace(/data-[^=]*="[^"]*"/g, '')
+    .replace(/class="[^"]*text-token-text-primary[^"]*"/g, 'class="prose-content"')
+    // Remove other problematic attributes
+    .replace(/tabindex="[^"]*"/g, '')
+    .replace(/dir="[^"]*"/g, '')
+    .replace(/data-testid="[^"]*"/g, '')
+    .replace(/data-turn-id="[^"]*"/g, '')
+    .replace(/data-scroll-anchor="[^"]*"/g, '')
+    .replace(/data-turn="[^"]*"/g, '');
+};
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Await params in Next.js 16
   const { slug } = await params;
@@ -153,9 +171,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       notFound();
     }
 
-    // Since we now embed images directly in content, we don't need reconstruction
-    // Just use the content as-is (it already contains the images)
-    const finalContent = post.content;
+    // Clean the content to remove problematic HTML
+    const cleanedContent = cleanContent(post.content);
+    const finalContent = cleanedContent;
 
     return (
       <div className="space-y-16">
