@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Validate category
-    const validCategories = ['General', 'Tech News', 'R&D'];
+    const validCategories = ['General', 'Tech News', 'R&D', 'Creative'];
     if (!validCategories.includes(data.category)) {
       return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
     }
