@@ -72,7 +72,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     
     // Validate category if provided
     if (changedFields.category) {
-      const validCategories = ['General', 'Tech News', 'R&D'];
+      const validCategories = ['General', 'Tech News', 'R&D', 'Creative'];
       if (!validCategories.includes(changedFields.category)) {
         return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
       }

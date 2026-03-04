@@ -140,6 +140,34 @@ const reconstructContentWithImages = (baseContent: string, markers: ImageMarker[
   return reconstructedContent;
 };
 
+// Clean up problematic HTML from certain sources
+const cleanContent = (content: string) => {
+  return content
+    // Remove article tags with problematic classes
+    .replace(/<article[^>]*>/g, '<div>')
+    .replace(/<\/article>/g, '</div>')
+    // Remove ALL data attributes and problematic classes more aggressively
+    .replace(/data-[^=]*="[^"]*"/g, '')
+    .replace(/class="[^"]*text-token-text-primary[^"]*"/g, '')
+    .replace(/class="[^"]*w-full[^"]*"/g, '')
+    .replace(/class="[^"]*focus:outline-none[^"]*"/g, '')
+    .replace(/class="[^"]*\[--shadow-height:[^]]*\][^"]*"/g, '')
+    .replace(/class="[^"]*has-data-writing-block:[^"]*"/g, '')
+    .replace(/class="[^"]*pointer-events-none[^"]*"/g, '')
+    .replace(/class="[^"]*scroll-mt-[^"]*"/g, '')
+    // Remove other problematic attributes
+    .replace(/tabindex="[^"]*"/g, '')
+    .replace(/dir="[^"]*"/g, '')
+    .replace(/data-testid="[^"]*"/g, '')
+    .replace(/data-turn-id="[^"]*"/g, '')
+    .replace(/data-scroll-anchor="[^"]*"/g, '')
+    .replace(/data-turn="[^"]*"/g, '')
+    // Remove empty class attributes
+    .replace(/class=""/g, '')
+    // Remove any remaining problematic inline styles
+    .replace(/style="[^"]*"/g, '');
+};
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Await params in Next.js 16
   const { slug } = await params;
@@ -153,9 +181,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       notFound();
     }
 
-    // Since we now embed images directly in content, we don't need reconstruction
-    // Just use the content as-is (it already contains the images)
-    const finalContent = post.content;
+    // Clean the content to remove problematic HTML
+    const cleanedContent = cleanContent(post.content);
+    const finalContent = cleanedContent;
 
     return (
       <div className="space-y-16">
@@ -223,7 +251,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div 
-              className="prose prose-lg max-w-none dark:prose-invert [&_img]:mx-auto [&_img]:block [&_img]:max-w-full [&_img]:h-auto"
+              className="prose prose-lg max-w-none dark:prose-invert [&_img]:mx-auto [&_img]:block [&_img]:max-w-full [&_img]:h-auto [&_.prose-content]:text-left [&_.prose-content]:max-w-none"
               dangerouslySetInnerHTML={{ __html: finalContent }}
             />
           </div>
