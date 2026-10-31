@@ -39,6 +39,9 @@ export default function Navbar() {
         <Link href="/" className="group flex items-center">
           <span className="font-mono text-lg font-bold tracking-tight text-ink">
             KT<span className="text-crimson-700">PROD</span>
+            <span className="ml-2 font-normal tracking-widest text-ink/50">
+              TECHNOLOGY
+            </span>
           </span>
         </Link>
 
